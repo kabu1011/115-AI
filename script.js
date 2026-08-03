@@ -1,18 +1,17 @@
-// ==========================================
-// AI 校隊每日確認系統
-// Version 1.0
-// ==========================================
+// =====================================
+// AI 校隊每日確認
+// script.js Part 1
+// =====================================
 
-const API_URL =
-"https://script.google.com/macros/s/AKfycbxPP-qxjl58Y8G4ozxpphw73z_8d2iM5oj4CgQ1WVPmWddg6O2yeiorxE_2ptZlDww/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbxPP-qxjl58Y8G4ozxpphw73z_8d2iM5oj4CgQ1WVPmWddg6O2yeiorxE_2ptZlDww/exec";
 
 let students = [];
 
-// ============================
-// 初始化
-// ============================
+//======================================
+// 載入
+//======================================
 
-window.onload = function(){
+window.onload = () => {
 
     showToday();
 
@@ -20,239 +19,133 @@ window.onload = function(){
 
     document
         .getElementById("searchInput")
-        .addEventListener("keyup",searchStudent);
+        .addEventListener("keyup", searchStudent);
 
 };
 
-// ============================
+//======================================
 // 日期
-// ============================
+//======================================
 
-function showToday(){
+function showToday() {
 
-    const today=new Date();
+    const d = new Date();
 
-    const text=
-        today.getFullYear()+"-"+
-
-        String(today.getMonth()+1).padStart(2,"0")+"-"+
-
-        String(today.getDate()).padStart(2,"0");
-
-    document.getElementById("today").innerHTML=text;
+    document.getElementById("today").innerHTML =
+        `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
 
 }
 
-// ============================
-// 取得學生
-// ============================
+//======================================
+// 讀學生
+//======================================
 
 async function loadStudents(){
 
-    Swal.fire({
-
-        title:"載入學生...",
-
-        allowOutsideClick:false,
-
-        didOpen(){
-
-            Swal.showLoading();
-
-        }
-
-    });
-
     try{
 
-        const res=await fetch(
-
-            API_URL+"?action=getStudents"
-
+        const res = await fetch(
+            API_URL + "?action=getStudents"
         );
 
-        students=await res.json();
+        students = await res.json();
 
         renderStudents(students);
 
-        Swal.close();
+        loadTodayStatus();
 
-        checkToday();
-
-    }
-
-    catch(err){
+    }catch(err){
 
         console.log(err);
 
         Swal.fire(
-
             "錯誤",
-
-            "無法讀取學生",
-
+            "無法取得學生名單",
             "error"
-
         );
 
     }
 
 }
 
-// ============================
-// 建立畫面
-// ============================
+//======================================
+// 建立卡片
+//======================================
 
 function renderStudents(list){
 
-    const container=
+    const studentList =
+        document.getElementById("studentList");
 
-    document.getElementById("studentList");
-
-    container.innerHTML="";
+    studentList.innerHTML="";
 
     list.forEach(student=>{
 
-        const template=
+        const template =
+            document
+            .getElementById("studentTemplate")
+            .content
+            .cloneNode(true);
 
-        document
+        const card =
+            template.querySelector(".student-card");
 
-        .getElementById("studentTemplate")
+        card.dataset.id = student.StudentID;
+        card.dataset.name = student.Name;
 
-        .content
+        template.querySelector(".student-id").innerHTML =
+            student.StudentID;
 
-        .cloneNode(true);
+        template.querySelector(".student-name").innerHTML =
+            student.Name;
 
-        const card=
+        card.onclick = ()=>{
 
-        template.querySelector(".student-card");
-
-        card.dataset.id=student.StudentID;
-
-        card.dataset.name=student.Name;
-
-        template.querySelector(".student-id").innerHTML=
-
-        student.StudentID;
-
-        template.querySelector(".student-name").innerHTML=
-
-        student.Name;
-
-        // radio name
-
-        template
-
-        .querySelectorAll(".status-radio")
-
-        .forEach(r=>{
-
-            r.name="status_"+student.StudentID;
-
-        });
-
-        template
-
-        .querySelectorAll(".lunch-radio")
-
-        .forEach(r=>{
-
-            r.name="lunch_"+student.StudentID;
-
-        });
-
-        // 展開
-
-        template
-
-        .querySelector(".student-header")
-
-        .onclick=()=>{
-
-            card.classList.toggle("open");
+            openDialog(card);
 
         };
 
-        // 全天請假
-
-        template
-
-        .querySelectorAll(".status-radio")
-
-        .forEach(r=>{
-
-            r.onchange=()=>{
-
-                autoLunch(card);
-
-            }
-
-        });
-
-        // 送出
-
-        template
-
-        .querySelector(".submit-btn")
-
-        .onclick=()=>{
-
-            submitStudent(card);
-
-        };
-
-        container.appendChild(template);
+        studentList.appendChild(template);
 
     });
 
 }
 
-// ============================
+//======================================
 // 搜尋
-// ============================
+//======================================
 
 function searchStudent(){
 
-    const keyword=
-
-    document
-
-    .getElementById("searchInput")
-
-    .value
-
-    .trim()
-
-    .toLowerCase();
+    const keyword =
+        document
+        .getElementById("searchInput")
+        .value
+        .trim()
+        .toLowerCase();
 
     if(keyword==""){
 
         renderStudents(students);
 
-        checkToday();
+        loadTodayStatus();
 
         return;
 
     }
 
-    const result=
+    const result = students.filter(s=>{
 
-    students.filter(s=>{
-
-        return(
+        return (
 
             s.StudentID
-
             .toLowerCase()
-
             .includes(keyword)
 
             ||
 
             s.Name
-
             .toLowerCase()
-
             .includes(keyword)
 
         );
@@ -261,98 +154,129 @@ function searchStudent(){
 
     renderStudents(result);
 
-    checkToday();
+    loadTodayStatus();
 
 }
+//======================================
+// 開啟確認視窗
+//======================================
 
-// ============================
-// 全天請假
-// ============================
-
-function autoLunch(card){
-
-    const status=
-
-    card.querySelector(
-
-        "input[name^='status_']:checked"
-
-    );
-
-    if(!status) return;
-
-    if(status.value=="全天請假"){
-
-        card
-
-        .querySelectorAll(
-
-            "input[name^='lunch_']"
-
-        )
-
-        .forEach(r=>{
-
-            if(r.value=="不需要"){
-
-                r.checked=true;
-
-            }
-
-        });
-
-    }
-
-}
-// ==========================================
-// 送出資料
-// ==========================================
-
-async function submitStudent(card){
+async function openDialog(card){
 
     const studentId = card.dataset.id;
     const name = card.dataset.name;
 
-    // 狀態
-    const status = card.querySelector(
-        "input[name^='status_']:checked"
+    const { value: formValues } = await Swal.fire({
+
+        title: `${studentId}<br>${name}`,
+
+        width: 420,
+
+        html: `
+
+        <div style="text-align:left">
+
+            <h5 style="margin-bottom:10px;">📌 今日狀態</h5>
+
+            <label>
+                <input type="radio" name="status" value="參加" checked>
+                🟢 參加
+            </label><br>
+
+            <label>
+                <input type="radio" name="status" value="上午請假">
+                🟡 上午請假
+            </label><br>
+
+            <label>
+                <input type="radio" name="status" value="下午請假">
+                🟠 下午請假
+            </label><br>
+
+            <label>
+                <input type="radio" name="status" value="全天請假">
+                🔴 全天請假
+            </label>
+
+            <hr>
+
+            <h5 style="margin-bottom:10px;">🍱 午餐</h5>
+
+            <label>
+                <input type="radio" name="lunch" value="需要" checked>
+                🍱 需要
+            </label><br>
+
+            <label>
+                <input type="radio" name="lunch" value="不需要">
+                🚫 不需要
+            </label>
+
+        </div>
+
+        `,
+
+        confirmButtonText:"確認送出",
+
+        showCancelButton:true,
+
+        cancelButtonText:"取消",
+
+        preConfirm:()=>{
+
+            const status =
+                document.querySelector("input[name='status']:checked");
+
+            const lunch =
+                document.querySelector("input[name='lunch']:checked");
+
+            return{
+
+                status:status.value,
+
+                lunch:lunch.value
+
+            }
+
+        }
+
+    });
+
+    if(!formValues) return;
+
+    saveStudent(
+
+        card,
+
+        studentId,
+
+        name,
+
+        formValues.status,
+
+        formValues.lunch
+
     );
 
-    if(!status){
+}
 
-        Swal.fire(
-            "提醒",
-            "請選擇今日狀態",
-            "warning"
-        );
+//======================================
+// 儲存
+//======================================
 
-        return;
+async function saveStudent(
 
-    }
+    card,
 
-    // 午餐
-    const lunch = card.querySelector(
-        "input[name^='lunch_']:checked"
-    );
+    studentId,
 
-    if(!lunch){
+    name,
 
-        Swal.fire(
-            "提醒",
-            "請選擇是否需要午餐",
-            "warning"
-        );
+    status,
 
-        return;
+    lunch
 
-    }
-
-    const today = new Date();
-
-    const date =
-        today.getFullYear()+"-"+
-        String(today.getMonth()+1).padStart(2,"0")+"-"+
-        String(today.getDate()).padStart(2,"0");
+){
 
     Swal.fire({
 
@@ -368,33 +292,74 @@ async function submitStudent(card){
 
     });
 
+    const today = new Date();
+
+    const date =
+
+        today.getFullYear()+"-"+
+
+        String(today.getMonth()+1).padStart(2,"0")+"-"+
+
+        String(today.getDate()).padStart(2,"0");
+
     try{
 
         const url =
+
             API_URL+
+
             "?action=save"+
+
             "&date="+encodeURIComponent(date)+
+
             "&studentId="+encodeURIComponent(studentId)+
+
             "&name="+encodeURIComponent(name)+
-            "&status="+encodeURIComponent(status.value)+
-            "&lunch="+encodeURIComponent(lunch.value);
 
-        const response = await fetch(url);
+            "&status="+encodeURIComponent(status)+
 
-        const result = await response.json();
+            "&lunch="+encodeURIComponent(lunch);
 
-        Swal.close();
+        const res = await fetch(url);
+
+        const result = await res.json();
 
         if(result.success){
 
-            finishCard(card,status.value,lunch.value);
+            updateCard(
+
+                card,
+
+                status,
+
+                lunch
+
+            );
+
+            Swal.fire({
+
+                icon:"success",
+
+                title:"完成",
+
+                text:"已成功送出",
+
+                timer:1200,
+
+                showConfirmButton:false
+
+            });
 
         }else{
 
             Swal.fire(
+
                 "錯誤",
+
                 result.message,
+
                 "error"
+
             );
 
         }
@@ -404,105 +369,106 @@ async function submitStudent(card){
         console.log(err);
 
         Swal.fire(
+
             "錯誤",
-            "無法連線 Apps Script",
+
+            "送出失敗",
+
             "error"
+
         );
 
     }
 
 }
+//======================================
+// 更新卡片
+//======================================
 
-// ==========================================
-// 完成
-// ==========================================
+function updateCard(card,status,lunch){
 
-function finishCard(card,status,lunch){
+    const statusText = card.querySelector(".student-status");
+    const dot = card.querySelector(".status-dot");
 
-    card.classList.add("completed");
+    card.classList.remove(
+        "green",
+        "yellow",
+        "orange",
+        "red"
+    );
 
-    card.classList.remove("open");
+    switch(status){
 
-    const body =
-        card.querySelector(".student-body");
+        case "參加":
 
-    body.style.display="none";
+            card.classList.add("green");
 
-    const old =
-        card.querySelector(".done-info");
+            dot.style.background="#4CAF50";
 
-    if(old){
+            statusText.innerHTML="🟢 已完成";
 
-        old.remove();
+            break;
+
+        case "上午請假":
+
+            card.classList.add("yellow");
+
+            dot.style.background="#FFC107";
+
+            statusText.innerHTML="🟡 上午請假";
+
+            break;
+
+        case "下午請假":
+
+            card.classList.add("orange");
+
+            dot.style.background="#FF9800";
+
+            statusText.innerHTML="🟠 下午請假";
+
+            break;
+
+        case "全天請假":
+
+            card.classList.add("red");
+
+            dot.style.background="#F44336";
+
+            statusText.innerHTML="🔴 全天請假";
+
+            break;
 
     }
 
-    const div=document.createElement("div");
-
-    div.className="done-info";
-
-    div.innerHTML=`
-        <div style="font-size:18px;">
-            ✅ 已完成今日確認
-        </div>
-
-        <hr>
-
-        <b>${status}</b>
-
-        <br>
-
-        🍱 ${lunch}
-    `;
-
-    card.appendChild(div);
-
-    card.querySelectorAll("input").forEach(i=>{
-
-        i.disabled=true;
-
-    });
-
-    card.querySelector(".submit-btn").disabled=true;
-
-    Swal.fire({
-
-        icon:"success",
-
-        title:"完成",
-
-        text:"已送出"
-
-    });
+    card.dataset.status=status;
+    card.dataset.lunch=lunch;
 
 }
 
-// ==========================================
-// 今日已回報
-// ==========================================
+//======================================
+// 今天已回報
+//======================================
 
-async function checkToday(){
+async function loadTodayStatus(){
 
     try{
 
-        const response =
-            await fetch(
-                API_URL+"?action=today"
-            );
+        const res = await fetch(
+            API_URL+"?action=today"
+        );
 
-        const list =
-            await response.json();
+        const list = await res.json();
 
         list.forEach(item=>{
 
-            const card =
-                document.querySelector(
-                    ".student-card[data-id='"+item.StudentID+"']"
-                );
+            const card=document.querySelector(
+                ".student-card[data-id='"+item.StudentID+"']"
+            );
 
             if(card){
 
-                finishCard(
+                updateCard(
 
                     card,
 
@@ -516,180 +482,26 @@ async function checkToday(){
 
         });
 
-    }catch(e){
+    }catch(err){
 
-        console.log(e);
-
-    }
-
-}
-// ==========================================
-// Part 3
-// 工具函式
-// ==========================================
-
-// 一次只展開一張卡片
-document.addEventListener("click", function (e) {
-
-    const header = e.target.closest(".student-header");
-
-    if (!header) return;
-
-    const currentCard = header.closest(".student-card");
-
-    document.querySelectorAll(".student-card").forEach(card => {
-
-        if (card !== currentCard) {
-            card.classList.remove("open");
-        }
-
-    });
-
-});
-
-// Enter 搜尋
-document
-.getElementById("searchInput")
-.addEventListener("keypress", function (e) {
-
-    if (e.key === "Enter") {
-
-        searchStudent();
+        console.log(err);
 
     }
 
-});
-
-// 狀態切換
-document.addEventListener("change", function(e){
-
-    if(!e.target.classList.contains("status-radio")) return;
-
-    const card = e.target.closest(".student-card");
-
-    if(!card) return;
-
-    const value = e.target.value;
-
-    const lunchNeed =
-        card.querySelector("input[value='需要']");
-
-    const lunchNo =
-        card.querySelector("input[value='不需要']");
-
-    if(value=="全天請假"){
-
-        lunchNo.checked=true;
-
-    }else{
-
-        if(!lunchNeed.checked && !lunchNo.checked){
-
-            lunchNeed.checked=true;
-
-        }
-
-    }
-
-});
-
-// 完成後右上角打勾
-function markComplete(card){
-
-    const btn = card.querySelector(".toggle-btn");
-
-    btn.innerHTML = `
-        <i class="fa-solid fa-circle-check text-success"></i>
-    `;
-
 }
 
-// 修改 finishCard
-const oldFinish = finishCard;
-
-finishCard = function(card,status,lunch){
-
-    oldFinish(card,status,lunch);
-
-    markComplete(card);
-
-}
-
-// Loading
-function loading(text="載入中..."){
-
-    Swal.fire({
-
-        title:text,
-
-        allowOutsideClick:false,
-
-        didOpen(){
-
-            Swal.showLoading();
-
-        }
-
-    });
-
-}
-
-// 關閉 Loading
-function closeLoading(){
-
-    Swal.close();
-
-}
-
-// Toast
-function toast(icon,title){
-
-    Swal.fire({
-
-        toast:true,
-
-        position:"top",
-
-        timer:1800,
-
-        showConfirmButton:false,
-
-        icon:icon,
-
-        title:title
-
-    });
-
-}
-
-// 今天日期 yyyy-MM-dd
-function getToday(){
-
-    const d=new Date();
-
-    return d.getFullYear()+"-"+
-        String(d.getMonth()+1).padStart(2,"0")+"-"+
-        String(d.getDate()).padStart(2,"0");
-
-}
-
-// 清空搜尋
-function clearSearch(){
-
-    document.getElementById("searchInput").value="";
-
-    renderStudents(students);
-
-    checkToday();
-
-}
-
+//======================================
 // 重新整理
-function reloadStudents(){
+//======================================
+
+function refresh(){
 
     loadStudents();
 
 }
 
+//======================================
 // Console
-console.log("AI 校隊每日確認系統 V1.0 啟動");
+//======================================
+
+console.log("AI 校隊每日確認 V2 啟動成功");
