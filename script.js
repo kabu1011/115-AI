@@ -287,31 +287,32 @@ async function openStudent(student){
 
 <div style="text-align:left">
 
-<h5 style="margin-bottom:15px;">📅 今日狀態</h5>
+<h5>📅 今日狀態</h5>
 
-<label><input type="radio" name="status" value="參加" ${status==="參加"?"checked":""}> 🟢 參加</label>
-
-<label><input type="radio" name="status" value="上午請假" ${status==="上午請假"?"checked":""}> 🟡 上午請假</label>
-
-<label><input type="radio" name="status" value="下午請假" ${status==="下午請假"?"checked":""}> 🟠 下午請假</label>
-
-<label><input type="radio" name="status" value="全天請假" ${status==="全天請假"?"checked":""}> 🔴 全天請假</label>
-
-<hr>
-
-<h5 style="margin-bottom:15px;">🍱 午餐</h5>
-
-<label><input type="radio" name="lunch" value="需要" ${lunch==="需要"?"checked":""}> 需要午餐</label>
-
-<label><input type="radio" name="lunch" value="不需要" ${lunch==="不需要"?"checked":""}> 不需要午餐</label>
+<div class="chip-group">
+<label class="chip" data-color="green"><input type="radio" name="status" value="參加" ${status==="參加"?"checked":""}> 🟢 參加</label>
+<label class="chip" data-color="yellow"><input type="radio" name="status" value="上午請假" ${status==="上午請假"?"checked":""}> 🟡 上午請假</label>
+<label class="chip" data-color="orange"><input type="radio" name="status" value="下午請假" ${status==="下午請假"?"checked":""}> 🟠 下午請假</label>
+<label class="chip" data-color="red"><input type="radio" name="status" value="全天請假" ${status==="全天請假"?"checked":""}> 🔴 全天請假</label>
+</div>
 
 <hr>
 
-<h5 style="margin-bottom:15px;">🥢 餐點</h5>
+<h5>🍱 午餐</h5>
 
-<label><input type="radio" name="meal" value="葷" ${meal==="葷"?"checked":""}> 🍖 葷食</label>
+<div class="chip-group">
+<label class="chip" data-color="teal"><input type="radio" name="lunch" value="需要" ${lunch==="需要"?"checked":""}> 🍽️ 需要午餐</label>
+<label class="chip" data-color="orange"><input type="radio" name="lunch" value="不需要" ${lunch==="不需要"?"checked":""}> 🙅 不需要午餐</label>
+</div>
 
-<label><input type="radio" name="meal" value="素" ${meal==="素"?"checked":""}> 🥬 素食</label>
+<hr>
+
+<h5>🥢 餐點</h5>
+
+<div class="chip-group">
+<label class="chip" data-color="pink"><input type="radio" name="meal" value="葷" ${meal==="葷"?"checked":""}> 🍖 葷食</label>
+<label class="chip" data-color="green"><input type="radio" name="meal" value="素" ${meal==="素"?"checked":""}> 🥬 素食</label>
+</div>
 
 </div>
 

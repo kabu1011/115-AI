@@ -1,6 +1,6 @@
 /* ==========================================
    福瑞斯特中小學－AI校隊
-   Style.css V4
+   Style.css V5 － 活潑可愛版
 ========================================== */
 
 *{
@@ -11,25 +11,23 @@
 
 :root{
 
-    --primary:#2F80ED;
+    /* 糖果色主題 */
+    --primary:#FF6F91;      /* 泡泡糖粉 */
+    --primary-dark:#F0537A;
+    --secondary:#4ECDC4;    /* 薄荷綠 */
+    --purple:#9B87F5;       /* 薰衣草紫 */
+    --yellow:#FFD166;       /* 奶油黃 */
 
-    --primary-light:#56CCF2;
+    --success:#3DD598;
+    --warning:#FFC94D;
+    --danger:#FF6B6B;
+    --orange:#FF9F5A;
 
-    --success:#27AE60;
-
-    --warning:#F2C94C;
-
-    --danger:#EB5757;
-
-    --bg:#F4F9FF;
-
+    --bg:#FFF8F0;
     --card:#FFFFFF;
-
-    --text:#1F3A5F;
-
-    --sub:#6B7C93;
-
-    --border:#DCEAF8;
+    --text:#3A3355;
+    --sub:#8D86A8;
+    --border:#F0E6FF;
 
 }
 
@@ -40,56 +38,64 @@
 body{
 
     font-family:
+    "Baloo 2","Quicksand",
     "Microsoft JhengHei",
     sans-serif;
 
     background:
-
-    linear-gradient(
-        180deg,
-        #F8FCFF 0%,
-        #EEF6FF 55%,
-        #E3F0FF 100%
-    );
+    #FFF8F0
+    radial-gradient(circle at 8% 15%, rgba(255,111,145,.14), transparent 40%)
+    radial-gradient(circle at 92% 10%, rgba(78,205,196,.16), transparent 42%)
+    radial-gradient(circle at 15% 90%, rgba(255,209,102,.18), transparent 45%)
+    radial-gradient(circle at 90% 85%, rgba(155,135,245,.14), transparent 45%);
 
     color:var(--text);
 
     min-height:100vh;
 
+    overflow-x:hidden;
+
 }
 
-/* 背景光影 */
+/* 飄浮小星星裝飾 */
 
-body::before{
+body::before,
+body::after{
 
-    content:"";
+    content:"✦";
 
     position:fixed;
 
-    left:-20%;
+    font-size:38px;
 
-    bottom:-220px;
+    color:var(--yellow);
 
-    width:150%;
-
-    height:650px;
-
-    background:
-
-    radial-gradient(
-
-        circle,
-
-        rgba(86,204,242,.18),
-
-        transparent 70%
-
-    );
+    opacity:.5;
 
     pointer-events:none;
 
+    animation:float 6s ease-in-out infinite;
+
     z-index:-1;
 
+}
+
+body::before{
+    left:6%;
+    top:12%;
+}
+
+body::after{
+    right:8%;
+    top:20%;
+    content:"❀";
+    color:var(--primary);
+    animation-delay:1.5s;
+}
+
+@keyframes float{
+    0%,100%{ transform:translateY(0) rotate(0deg); }
+    50%{ transform:translateY(-18px) rotate(12deg); }
 }
 
 /* ===============================
@@ -110,7 +116,9 @@ body::before{
 
     text-align:center;
 
-    padding:15px 0 35px;
+    padding:20px 0 35px;
+
+    position:relative;
 
 }
 
@@ -120,25 +128,25 @@ body::before{
 
 .school-logo{
 
-    width:340px;
+    width:320px;
 
-    max-width:90%;
+    max-width:85%;
 
     height:auto;
 
     display:block;
 
-    margin:0 auto 25px;
+    margin:0 auto 20px;
 
-    transition:.3s;
+    transition:.35s cubic-bezier(.34,1.56,.64,1);
 
     filter:
 
     drop-shadow(
 
-        0 10px 20px
+        0 10px 18px
 
-        rgba(47,128,237,.15)
+        rgba(255,111,145,.25)
 
     );
 
@@ -146,7 +154,7 @@ body::before{
 
 .school-logo:hover{
 
-    transform:scale(1.03);
+    transform:scale(1.06) rotate(-2deg);
 
 }
 
@@ -156,15 +164,15 @@ body::before{
 
 .main-title{
 
-    font-size:48px;
+    font-size:44px;
 
-    font-weight:700;
+    font-weight:800;
 
     color:var(--text);
 
     letter-spacing:1px;
 
-    margin-bottom:10px;
+    margin-bottom:8px;
 
 }
 
@@ -174,11 +182,23 @@ body::before{
 
 .sub-title{
 
-    font-size:22px;
+    display:inline-block;
 
-    color:var(--sub);
+    font-size:18px;
 
-    margin-bottom:35px;
+    font-weight:700;
+
+    color:var(--primary-dark);
+
+    margin-bottom:10px;
+
+    background:#FFE4EC;
+
+    padding:8px 24px;
+
+    border-radius:999px;
+
+    border:2px dashed var(--primary);
 
 }
 
@@ -190,13 +210,31 @@ body::before{
 
     text-align:center;
 
-    font-size:32px;
+    font-size:30px;
 
-    font-weight:bold;
+    font-weight:800;
 
     color:var(--text);
 
     margin-bottom:35px;
+
+}
+
+.page-title::after{
+
+    content:"";
+
+    display:block;
+
+    width:70px;
+
+    height:6px;
+
+    margin:10px auto 0;
+
+    border-radius:10px;
+
+    background:linear-gradient(90deg,var(--primary),var(--yellow));
 
 }
 /* ==========================================
@@ -207,31 +245,59 @@ body::before{
 
     background:var(--card);
 
-    border:1px solid var(--border);
+    border:3px solid var(--border);
 
-    border-radius:28px;
+    border-radius:32px;
 
     padding:30px;
 
     height:100%;
 
-    transition:.3s;
+    transition:.3s cubic-bezier(.34,1.56,.64,1);
 
     cursor:pointer;
 
+    position:relative;
+
+    overflow:hidden;
+
     box-shadow:
 
-        0 12px 35px rgba(47,128,237,.08);
+        0 12px 0 rgba(255,111,145,.12),
+        0 12px 30px rgba(155,135,245,.12);
+
+}
+
+.activity-card::after{
+
+    content:"🎈";
+
+    position:absolute;
+
+    right:-10px;
+
+    bottom:-15px;
+
+    font-size:90px;
+
+    opacity:.08;
+
+    transform:rotate(-10deg);
+
+    pointer-events:none;
 
 }
 
 .activity-card:hover{
 
-    transform:translateY(-8px);
+    transform:translateY(-8px) rotate(-1deg);
+
+    border-color:var(--primary);
 
     box-shadow:
 
-        0 20px 50px rgba(47,128,237,.18);
+        0 16px 0 rgba(255,111,145,.18),
+        0 24px 45px rgba(155,135,245,.22);
 
 }
 
@@ -239,13 +305,21 @@ body::before{
 
 .activity-date{
 
-    font-size:36px;
+    display:inline-block;
 
-    font-weight:700;
+    font-size:26px;
 
-    color:var(--primary);
+    font-weight:800;
 
-    margin-bottom:10px;
+    color:#fff;
+
+    margin-bottom:14px;
+
+    background:linear-gradient(90deg,var(--primary),var(--purple));
+
+    padding:6px 20px;
+
+    border-radius:14px;
 
 }
 
@@ -253,9 +327,11 @@ body::before{
 
     font-size:22px;
 
-    color:var(--sub);
+    font-weight:700;
 
-    margin-bottom:25px;
+    color:var(--text);
+
+    margin-bottom:22px;
 
     line-height:1.6;
 
@@ -263,11 +339,13 @@ body::before{
 
 .activity-progress{
 
-    margin-bottom:25px;
+    margin-bottom:22px;
 
-    color:#6B7280;
+    color:var(--sub);
 
-    font-size:18px;
+    font-size:17px;
+
+    font-weight:600;
 
 }
 
@@ -277,7 +355,7 @@ body::before{
 
     font-size:22px;
 
-    font-weight:bold;
+    font-weight:800;
 
 }
 
@@ -291,13 +369,13 @@ body::before{
 
     border:none;
 
-    border-radius:16px;
+    border-radius:999px;
 
     padding:15px;
 
-    font-size:20px;
+    font-size:19px;
 
-    font-weight:bold;
+    font-weight:800;
 
     color:#fff;
 
@@ -307,23 +385,33 @@ body::before{
 
             90deg,
 
-            #2F80ED,
+            var(--primary),
 
-            #56CCF2
+            var(--purple)
 
         );
 
-    transition:.25s;
+    box-shadow:0 6px 0 var(--primary-dark);
+
+    transition:.15s;
 
 }
 
 .btn-start:hover{
 
-    transform:translateY(-2px);
+    transform:translateY(-3px);
 
-    box-shadow:
+    box-shadow:0 9px 0 var(--primary-dark);
 
-        0 12px 28px rgba(47,128,237,.28);
+    filter:brightness(1.05);
+
+}
+
+.btn-start:active{
+
+    transform:translateY(2px);
+
+    box-shadow:0 3px 0 var(--primary-dark);
 
 }
 
@@ -337,9 +425,9 @@ body::before{
 
     background:#FFFFFF;
 
-    border:1px solid var(--border);
+    border:3px solid var(--border);
 
-    border-radius:24px;
+    border-radius:28px;
 
     padding:24px;
 
@@ -347,27 +435,29 @@ body::before{
 
     overflow:hidden;
 
-    transition:.3s;
+    transition:.3s cubic-bezier(.34,1.56,.64,1);
 
     cursor:pointer;
 
     box-shadow:
 
-        0 10px 30px rgba(47,128,237,.08);
+        0 10px 0 rgba(155,135,245,.10),
+        0 10px 26px rgba(155,135,245,.14);
 
 }
 
 .student-card:hover{
 
-    transform:translateY(-6px);
+    transform:translateY(-6px) scale(1.02);
 
     box-shadow:
 
-        0 18px 40px rgba(47,128,237,.18);
+        0 14px 0 rgba(155,135,245,.16),
+        0 20px 34px rgba(155,135,245,.2);
 
 }
 
-/* 左側色條 */
+/* 左側圓角色塊，取代直角色條 */
 
 .student-card::before{
 
@@ -375,15 +465,17 @@ body::before{
 
     position:absolute;
 
-    left:0;
+    left:14px;
 
-    top:0;
+    top:14px;
 
-    width:6px;
+    width:14px;
 
-    height:100%;
+    height:14px;
 
-    background:var(--primary);
+    border-radius:50%;
+
+    background:#B0BEC5;
 
 }
 
@@ -391,31 +483,45 @@ body::before{
 
 .student-id{
 
-    font-size:18px;
+    font-size:16px;
 
-    color:#7A8AA0;
+    font-weight:700;
 
-    margin-bottom:10px;
+    color:var(--sub);
+
+    margin-bottom:8px;
+
+    margin-left:26px;
 
 }
 
 .student-name{
 
-    font-size:34px;
+    font-size:30px;
 
-    font-weight:700;
+    font-weight:800;
 
     color:var(--text);
 
-    margin-bottom:20px;
+    margin-bottom:18px;
+
+    margin-left:26px;
 
 }
 
 .student-status{
 
-    font-size:20px;
+    font-size:18px;
 
-    font-weight:600;
+    font-weight:700;
+
+    display:inline-block;
+
+    padding:6px 16px;
+
+    border-radius:999px;
+
+    background:#F3F0FF;
 
 }
 
@@ -425,17 +531,19 @@ body::before{
 
     position:absolute;
 
-    right:20px;
+    right:18px;
 
-    top:20px;
+    top:18px;
 
-    width:15px;
+    width:16px;
 
-    height:15px;
+    height:16px;
 
     border-radius:50%;
 
     background:#B0BEC5;
+
+    box-shadow:0 0 0 4px #F4F1FB;
 
 }
 
@@ -444,52 +552,33 @@ body::before{
 ========================================== */
 
 .green{
-
-    border-color:#8BE3A4;
-
+    border-color:#AEEBCB;
+    background:#F3FFF8;
 }
-
-.green::before{
-
-    background:#27AE60;
-
-}
+.green::before{ background:#3DD598; }
+.green .student-status{ background:#DFFAEC; color:#1E9E68; }
 
 .yellow{
-
-    border-color:#FFE082;
-
+    border-color:#FFE8B0;
+    background:#FFFCF3;
 }
-
-.yellow::before{
-
-    background:#F2C94C;
-
-}
+.yellow::before{ background:#FFC94D; }
+.yellow .student-status{ background:#FFF2D2; color:#B9860B; }
 
 .orange{
-
-    border-color:#FFCC80;
-
+    border-color:#FFD4B0;
+    background:#FFF9F3;
 }
-
-.orange::before{
-
-    background:#FB923C;
-
-}
+.orange::before{ background:#FF9F5A; }
+.orange .student-status{ background:#FFE8D6; color:#D6641C; }
 
 .red{
-
-    border-color:#FFB3B3;
-
+    border-color:#FFC3C3;
+    background:#FFF6F6;
 }
+.red::before{ background:#FF6B6B; }
+.red .student-status{ background:#FFE0E0; color:#E03C3C; }
 
-.red::before{
-
-    background:#EB5757;
-
-}
 /* ==========================================
    Search
 ========================================== */
@@ -498,15 +587,17 @@ body::before{
 
     background:#FFFFFF;
 
-    border:2px solid var(--border);
+    border:3px solid var(--border);
 
-    border-radius:18px;
+    border-radius:999px;
 
-    height:60px;
+    height:58px;
 
-    padding:0 20px;
+    padding:0 26px;
 
-    font-size:20px;
+    font-size:19px;
+
+    font-weight:600;
 
     color:var(--text);
 
@@ -514,13 +605,13 @@ body::before{
 
     box-shadow:
 
-        0 8px 20px rgba(47,128,237,.05);
+        0 6px 16px rgba(155,135,245,.08);
 
 }
 
 #searchInput::placeholder{
 
-    color:#94A3B8;
+    color:#B7AFD6;
 
 }
 
@@ -532,7 +623,7 @@ body::before{
 
     box-shadow:
 
-        0 0 0 4px rgba(47,128,237,.12);
+        0 0 0 5px rgba(255,111,145,.15);
 
 }
 
@@ -542,17 +633,20 @@ body::before{
 
 .swal2-popup{
 
-    border-radius:26px !important;
+    border-radius:32px !important;
 
-    background:#FFFFFF !important;
+    background:#FFFDF9 !important;
 
     color:var(--text) !important;
 
-    padding:28px !important;
+    padding:30px !important;
+
+    border:4px solid #FFE4EC !important;
 
     box-shadow:
 
-        0 20px 60px rgba(47,128,237,.18);
+        0 20px 0 rgba(255,111,145,.10),
+        0 24px 60px rgba(155,135,245,.2) !important;
 
 }
 
@@ -560,9 +654,9 @@ body::before{
 
     color:var(--text) !important;
 
-    font-size:34px !important;
+    font-size:32px !important;
 
-    font-weight:700 !important;
+    font-weight:800 !important;
 
 }
 
@@ -570,51 +664,23 @@ body::before{
 
     color:#44556C !important;
 
-    font-size:20px !important;
+    font-size:19px !important;
 
     text-align:left;
 
 }
 
-/* ===== Radio 美化 ===== */
+/* ===== 區塊標題 ===== */
 
-.swal2-html-container label{
+.swal2-html-container h5{
 
-    display:flex;
+    color:var(--text);
 
-    align-items:center;
+    font-size:20px;
 
-    gap:12px;
+    font-weight:800;
 
-    margin:10px 0;
-
-    padding:14px 16px;
-
-    border:2px solid #E7EEF8;
-
-    border-radius:16px;
-
-    cursor:pointer;
-
-    transition:.25s;
-
-    background:#FAFCFF;
-
-}
-
-.swal2-html-container label:hover{
-
-    background:#EEF6FF;
-
-    border-color:#56CCF2;
-
-}
-
-.swal2-html-container input[type="radio"]{
-
-    transform:scale(1.3);
-
-    accent-color:#2F80ED;
+    margin-bottom:14px;
 
 }
 
@@ -624,23 +690,98 @@ body::before{
 
     border:none;
 
-    border-top:1px solid #E8EEF6;
+    border-top:3px dashed #F0E6FF;
 
-    margin:24px 0;
+    margin:22px 0;
+
+}
+
+/* ===== Chip 選項（取代原本呆板的 radio） ===== */
+
+.chip-group{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:10px;
+
+    margin:0 0 6px;
 
 }
 
-/* ===== 標題 ===== */
+.swal2-html-container label.chip{
 
-.swal2-html-container h5{
+    display:flex;
 
-    color:#1F3A5F;
+    align-items:center;
 
-    font-size:22px;
+    justify-content:center;
 
-    margin-bottom:12px;
+    gap:8px;
+
+    margin:0;
+
+    padding:12px 18px;
+
+    border:3px solid #EFE9FB;
+
+    border-radius:999px;
+
+    cursor:pointer;
+
+    transition:.2s cubic-bezier(.34,1.56,.64,1);
+
+    background:#FAF8FF;
+
+    font-weight:700;
+
+    font-size:17px;
+
+    flex:0 0 auto;
 
 }
+
+.swal2-html-container label.chip:hover{
+
+    transform:translateY(-2px) scale(1.03);
+
+    background:#F3EEFF;
+
+    border-color:var(--purple);
+
+}
+
+.swal2-html-container label.chip input[type="radio"]{
+
+    position:absolute;
+
+    opacity:0;
+
+    width:0;
+
+    height:0;
+
+}
+
+.swal2-html-container label.chip:has(input:checked){
+
+    color:#fff;
+
+    transform:translateY(-2px) scale(1.05);
+
+    box-shadow:0 6px 14px rgba(155,135,245,.35);
+
+}
+
+/* 各分類選中後的糖果配色 */
+
+.chip[data-color="green"]:has(input:checked){ background:#3DD598; border-color:#3DD598; }
+.chip[data-color="yellow"]:has(input:checked){ background:#FFC94D; border-color:#FFC94D; }
+.chip[data-color="orange"]:has(input:checked){ background:#FF9F5A; border-color:#FF9F5A; }
+.chip[data-color="red"]:has(input:checked){ background:#FF6B6B; border-color:#FF6B6B; }
+.chip[data-color="teal"]:has(input:checked){ background:#4ECDC4; border-color:#4ECDC4; }
+.chip[data-color="pink"]:has(input:checked){ background:#FF6F91; border-color:#FF6F91; }
 
 /* ===== 按鈕 ===== */
 
@@ -650,35 +791,43 @@ body::before{
 
         90deg,
 
-        #2F80ED,
+        var(--primary),
 
-        #56CCF2
+        var(--purple)
 
     ) !important;
 
-    border-radius:14px !important;
+    border-radius:999px !important;
 
     font-size:18px !important;
 
-    padding:12px 30px !important;
+    padding:13px 32px !important;
 
-    font-weight:bold !important;
+    font-weight:800 !important;
+
+    box-shadow:0 6px 0 var(--primary-dark) !important;
+
+}
+
+.swal2-confirm:hover{
+
+    transform:translateY(-2px);
 
 }
 
 .swal2-cancel{
 
-    background:#E8EEF6 !important;
+    background:#F3F0FF !important;
 
-    color:#42556C !important;
+    color:#7A6FB0 !important;
 
-    border-radius:14px !important;
+    border-radius:999px !important;
 
     font-size:18px !important;
 
-    padding:12px 30px !important;
+    padding:13px 32px !important;
 
-    font-weight:bold !important;
+    font-weight:800 !important;
 
 }
 
@@ -726,7 +875,7 @@ body::before{
 
 ::-webkit-scrollbar-thumb{
 
-    background:#8CC6FF;
+    background:var(--primary);
 
     border-radius:20px;
 
@@ -734,13 +883,13 @@ body::before{
 
 ::-webkit-scrollbar-thumb:hover{
 
-    background:#56CCF2;
+    background:var(--purple);
 
 }
 
 ::-webkit-scrollbar-track{
 
-    background:#EEF6FF;
+    background:#FFF3F6;
 
 }
 
@@ -752,25 +901,25 @@ body::before{
 
     .school-logo{
 
-        width:240px;
+        width:220px;
 
     }
 
     .main-title{
 
-        font-size:32px;
+        font-size:28px;
 
     }
 
     .sub-title{
 
-        font-size:18px;
+        font-size:15px;
 
     }
 
     .page-title{
 
-        font-size:26px;
+        font-size:24px;
 
     }
 
@@ -782,7 +931,7 @@ body::before{
 
     .activity-date{
 
-        font-size:28px;
+        font-size:22px;
 
     }
 
@@ -802,21 +951,29 @@ body::before{
 
     .student-name{
 
-        font-size:28px;
+        font-size:24px;
 
     }
 
     .student-status{
 
-        font-size:18px;
+        font-size:16px;
 
     }
 
     #searchInput{
 
-        height:54px;
+        height:52px;
 
-        font-size:18px;
+        font-size:17px;
+
+    }
+
+    .swal2-html-container label.chip{
+
+        font-size:15px;
+
+        padding:10px 14px;
 
     }
 
