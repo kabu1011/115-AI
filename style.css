@@ -29,7 +29,7 @@
 
     --text:#FFFFFF;
 
-    --sub:#94A3B8;
+    --sub:#CBD5E1;
 
 }
 
@@ -38,7 +38,7 @@ body{
     font-family:"Microsoft JhengHei",sans-serif;
 
     background:
-        radial-gradient(circle at top,#183B66,#081120);
+    radial-gradient(circle at top,#183B66,#081120);
 
     color:var(--text);
 
@@ -62,7 +62,7 @@ body{
 
     text-align:center;
 
-    margin:40px 0;
+    margin:10px 0 35px;
 
 }
 
@@ -72,28 +72,35 @@ body{
 
 .school-logo{
 
-    width:180px;
+    width:320px;
 
-    height:180px;
+    max-width:95%;
+
+    height:auto;
+
+    display:block;
+
+    margin:0 auto 25px;
 
     object-fit:contain;
 
-    margin-bottom:25px;
-
-    transition:.35s;
+    transition:.3s;
 
     filter:
 
     drop-shadow(
-        0 0 30px
+
+        0 8px 30px
+
         rgba(59,130,246,.45)
+
     );
 
 }
 
 .school-logo:hover{
 
-    transform:scale(1.08);
+    transform:scale(1.05);
 
 }
 
@@ -101,11 +108,13 @@ body{
 
 .main-title{
 
-    font-size:42px;
+    font-size:46px;
 
     font-weight:700;
 
     letter-spacing:2px;
+
+    margin-bottom:8px;
 
 }
 
@@ -113,9 +122,9 @@ body{
 
     color:var(--sub);
 
-    font-size:18px;
+    font-size:24px;
 
-    margin-top:8px;
+    margin-bottom:35px;
 
 }
 
@@ -123,11 +132,13 @@ body{
 
 .page-title{
 
-    font-size:28px;
+    text-align:center;
+
+    font-size:30px;
 
     font-weight:bold;
 
-    margin-bottom:25px;
+    margin-bottom:30px;
 
 }
 
@@ -139,9 +150,9 @@ body{
 
     background:
 
-    rgba(18,32,51,.85);
+    rgba(18,32,51,.88);
 
-    backdrop-filter:blur(18px);
+    backdrop-filter:blur(15px);
 
     border:
 
@@ -151,11 +162,11 @@ body{
 
     border-radius:24px;
 
-    padding:28px;
-
-    transition:.3s;
+    padding:30px;
 
     cursor:pointer;
+
+    transition:.3s;
 
     height:100%;
 
@@ -167,49 +178,51 @@ body{
 
     translateY(-6px);
 
-    border-color:
-
-    var(--blue);
+    border-color:var(--blue);
 
     box-shadow:
 
-    0 20px 40px
+    0 20px 45px
 
     rgba(59,130,246,.35);
 
 }
 
-/* ========================= */
-
 .activity-date{
 
-    font-size:32px;
+    font-size:34px;
 
     font-weight:bold;
+
+    margin-bottom:12px;
 
 }
 
 .activity-name{
 
-    margin-top:10px;
+    font-size:22px;
 
     color:var(--sub);
 
-    font-size:20px;
+    margin-bottom:25px;
 
 }
 
 .activity-progress{
 
-    margin:25px 0;
+    font-size:18px;
 
     color:var(--sub);
+
+    margin-bottom:25px;
 
 }
 
 .progress-text{
 
     color:var(--green);
+
+    font-size:22px;
 
     font-weight:bold;
 
@@ -220,6 +233,18 @@ body{
 .btn-start{
 
     width:100%;
+
+    border:none;
+
+    border-radius:16px;
+
+    padding:14px;
+
+    font-size:20px;
+
+    font-weight:bold;
+
+    color:white;
 
     background:
 
@@ -232,18 +257,6 @@ body{
         #3B82F6
 
     );
-
-    border:none;
-
-    color:white;
-
-    font-size:18px;
-
-    font-weight:bold;
-
-    border-radius:15px;
-
-    padding:14px;
 
     transition:.3s;
 
@@ -298,8 +311,6 @@ body{
 
 }
 
-/* 左側光條 */
-
 .student-card::before{
 
     content:"";
@@ -318,49 +329,49 @@ body{
 
 }
 
-/* 學號 */
+/* ==========================
+   Student
+========================== */
 
 .student-id{
 
-    font-size:17px;
+    font-size:18px;
 
     color:var(--sub);
 
-    margin-bottom:8px;
+    margin-bottom:10px;
 
 }
-
-/* 姓名 */
 
 .student-name{
 
-    font-size:30px;
+    font-size:34px;
 
     font-weight:700;
 
-    margin-bottom:25px;
+    color:white;
+
+    margin-bottom:20px;
+
+    word-break:break-all;
 
 }
 
-/* 狀態 */
-
 .student-status{
 
-    font-size:18px;
+    font-size:20px;
 
     font-weight:600;
 
 }
 
-/* 右上角狀態 */
-
 .status-dot{
 
     position:absolute;
 
-    right:20px;
-
     top:20px;
+
+    right:20px;
 
     width:14px;
 
@@ -372,9 +383,9 @@ body{
 
 }
 
-/* ==========================================
-   狀態顏色
-========================================== */
+/* ==========================
+   Status Color
+========================== */
 
 .green{
 
@@ -424,9 +435,9 @@ body{
 
 }
 
-/* ==========================================
+/* ==========================
    Search
-========================================== */
+========================== */
 
 #searchInput{
 
@@ -444,7 +455,7 @@ body{
 
     font-size:20px;
 
-    transition:.3s;
+    transition:.25s;
 
 }
 
@@ -460,17 +471,17 @@ body{
 
     border-color:var(--blue);
 
-    color:white;
-
     outline:none;
 
-    box-shadow:0 0 20px rgba(59,130,246,.35);
+    color:white;
+
+    box-shadow:0 0 15px rgba(59,130,246,.35);
 
 }
 
-/* ==========================================
+/* ==========================
    SweetAlert
-========================================== */
+========================== */
 
 .swal2-popup{
 
@@ -478,43 +489,35 @@ body{
 
     color:white !important;
 
-    border-radius:25px !important;
+    border-radius:24px !important;
 
 }
 
 .swal2-title{
 
-    color:white !important;
+    font-size:34px !important;
 
-    font-size:36px !important;
+    color:white !important;
 
 }
 
 .swal2-html-container{
 
-    color:white !important;
+    font-size:22px !important;
 
-    font-size:24px !important;
+    color:white !important;
 
 }
 
 .swal2-confirm{
 
-    background:linear-gradient(
+    background:#2563EB !important;
 
-        90deg,
+    border-radius:12px !important;
 
-        #2563EB,
+    font-size:20px !important;
 
-        #3B82F6
-
-    ) !important;
-
-    border-radius:15px !important;
-
-    font-size:22px !important;
-
-    padding:12px 35px !important;
+    padding:10px 28px !important;
 
 }
 
@@ -522,13 +525,13 @@ body{
 
     background:#475569 !important;
 
-    border-radius:15px !important;
+    border-radius:12px !important;
 
-    font-size:22px !important;
+    font-size:20px !important;
+
+    padding:10px 28px !important;
 
 }
-
-/* Radio */
 
 .swal2-html-container label{
 
@@ -536,45 +539,45 @@ body{
 
     margin:12px 0;
 
-    font-size:24px;
+    font-size:22px;
 
 }
 
-/* ==========================================
+/* ==========================
    Animation
-========================================== */
+========================== */
 
 .activity-card,
 
 .student-card{
 
-    animation:fade .35s ease;
+    animation:fadeIn .35s ease;
 
 }
 
-@keyframes fade{
+@keyframes fadeIn{
 
-from{
+    from{
 
-    opacity:0;
+        opacity:0;
 
-    transform:translateY(15px);
+        transform:translateY(15px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
 
 }
 
-to{
-
-    opacity:1;
-
-    transform:translateY(0);
-
-}
-
-}
-
-/* ==========================================
+/* ==========================
    Scrollbar
-========================================== */
+========================== */
 
 ::-webkit-scrollbar{
 
@@ -596,72 +599,72 @@ to{
 
 }
 
-/* ==========================================
+/* ==========================
    Mobile
-========================================== */
+========================== */
 
 @media(max-width:768px){
 
-.school-logo{
+    .school-logo{
 
-    width:140px;
+        width:220px;
 
-    height:140px;
+    }
 
-}
+    .main-title{
 
-.main-title{
+        font-size:30px;
 
-    font-size:28px;
+    }
 
-}
+    .sub-title{
 
-.sub-title{
+        font-size:18px;
 
-    font-size:15px;
+    }
 
-}
+    .page-title{
 
-.page-title{
+        font-size:24px;
 
-    font-size:22px;
+    }
 
-}
+    .activity-date{
 
-.activity-date{
+        font-size:26px;
 
-    font-size:26px;
+    }
 
-}
+    .activity-name{
 
-.activity-name{
+        font-size:18px;
 
-    font-size:18px;
+    }
 
-}
+    .student-name{
 
-.student-name{
+        font-size:28px;
 
-    font-size:24px;
+    }
 
-}
+    .student-status{
 
-.student-status{
+        font-size:18px;
 
-    font-size:16px;
+    }
 
-}
+    .student-card{
 
-.student-card{
+        min-height:170px;
 
-    min-height:160px;
+    }
 
-}
+    #searchInput{
 
-#searchInput{
+        font-size:18px;
 
-    font-size:18px;
+        height:55px;
 
-}
+    }
 
 }
