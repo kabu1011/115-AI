@@ -4,8 +4,7 @@
 // ==========================================
 
 // ★ 改成你的 Apps Script Web App 網址
-const API_URL = "https://script.google.com/macros/s/AKfycbxPP-qxjl58Y8G4ozxp
-    phw73z_8d2iM5oj4CgQ1WVPmWddg6O2yeiorxE_2ptZlDww/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbxPP-qxjl58Y8G4ozxpphw73z_8d2iM5oj4CgQ1WVPmWddg6O2yeiorxE_2ptZlDww/exec";
 
 let activities = [];
 let students = [];
