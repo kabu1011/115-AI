@@ -1,7 +1,7 @@
-/* ===================================
-   AI 校隊每日確認
-   Tech Blue Theme
-=================================== */
+/* ==========================================
+   福瑞斯特中小學－AI校隊
+   Tech Blue Theme V1
+========================================== */
 
 *{
     margin:0;
@@ -15,77 +15,182 @@ body{
 
     background:#0F172A;
 
-    color:#fff;
+    color:#FFFFFF;
 
 }
 
-/* ===== Container ===== */
+/* ==========================
+   Container
+========================== */
 
 .container{
 
-    max-width:900px;
+    max-width:1200px;
 
 }
 
-/* ===== 標題 ===== */
+/* ==========================
+   Header
+========================== */
 
-h2{
+.header{
 
-    color:#FFFFFF;
+    text-align:center;
+
+    margin-bottom:40px;
+
+}
+
+.school-logo{
+
+    width:100px;
+
+    height:100px;
+
+    object-fit:contain;
+
+    margin-bottom:15px;
+
+    filter:drop-shadow(0 0 20px rgba(37,99,235,.35));
+
+}
+
+.main-title{
+
+    font-size:38px;
 
     font-weight:700;
 
-    letter-spacing:1px;
+    margin-bottom:10px;
+
+    letter-spacing:2px;
 
 }
 
-#today{
+.sub-title{
 
     color:#94A3B8;
 
-    font-size:16px;
+    font-size:18px;
 
 }
 
-/* ===== 搜尋 ===== */
+/* ==========================
+   Page Title
+========================== */
 
-#searchInput{
+.page-title{
+
+    font-size:26px;
+
+    font-weight:bold;
+
+    margin-bottom:25px;
+
+}
+
+/* ==========================
+   Activity Card
+========================== */
+
+.activity-card{
 
     background:#1E293B;
 
     border:1px solid #334155;
 
-    color:white;
+    border-radius:22px;
 
-    border-radius:15px;
+    padding:25px;
 
-    height:58px;
+    transition:.25s;
+
+    cursor:pointer;
+
+    height:100%;
+
+}
+
+.activity-card:hover{
+
+    transform:translateY(-5px);
+
+    border-color:#2563EB;
+
+    box-shadow:0 12px 35px rgba(37,99,235,.30);
+
+}
+
+.activity-date{
+
+    font-size:30px;
+
+    font-weight:bold;
+
+    color:#FFFFFF;
+
+    margin-bottom:10px;
+
+}
+
+.activity-name{
 
     font-size:20px;
 
-    transition:.3s;
+    color:#CBD5E1;
+
+    margin-bottom:20px;
 
 }
 
-#searchInput::placeholder{
+.activity-progress{
 
     color:#94A3B8;
 
+    margin-bottom:20px;
+
 }
 
-#searchInput:focus{
+.progress-text{
 
-    background:#273449;
+    color:#22C55E;
 
-    border-color:#3B82F6;
+    font-weight:bold;
+
+}
+
+.btn-start{
+
+    width:100%;
+
+    background:#2563EB;
 
     color:white;
 
-    box-shadow:0 0 15px rgba(59,130,246,.35);
+    border:none;
+
+    border-radius:12px;
+
+    padding:12px;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    transition:.25s;
 
 }
 
-/* ===== 卡片 ===== */
+.btn-start:hover{
+
+    background:#1D4ED8;
+
+    color:white;
+
+}
+/* ==========================
+   Student Card
+========================== */
 
 .student-card{
 
@@ -95,7 +200,7 @@ h2{
 
     border:1px solid #334155;
 
-    border-radius:20px;
+    border-radius:22px;
 
     padding:22px;
 
@@ -103,7 +208,7 @@ h2{
 
     transition:.25s;
 
-    min-height:170px;
+    min-height:180px;
 
     overflow:hidden;
 
@@ -113,13 +218,13 @@ h2{
 
     transform:translateY(-5px);
 
-    border-color:#3B82F6;
+    border-color:#2563EB;
 
-    box-shadow:0 15px 35px rgba(59,130,246,.35);
+    box-shadow:0 15px 40px rgba(37,99,235,.35);
 
 }
 
-/* ===== 左上藍線 ===== */
+/* 左側藍線 */
 
 .student-card::before{
 
@@ -135,37 +240,37 @@ h2{
 
     height:100%;
 
-    background:#3B82F6;
+    background:#2563EB;
 
 }
 
-/* ===== StudentID ===== */
+/* StudentID */
 
 .student-id{
 
     color:#94A3B8;
 
-    font-size:17px;
+    font-size:16px;
 
     margin-bottom:8px;
 
 }
 
-/* ===== 姓名 ===== */
+/* 姓名 */
 
 .student-name{
-
-    color:#FFFFFF;
 
     font-size:30px;
 
     font-weight:bold;
 
+    color:#FFFFFF;
+
     margin-bottom:25px;
 
 }
 
-/* ===== 狀態 ===== */
+/* 狀態 */
 
 .student-status{
 
@@ -175,15 +280,15 @@ h2{
 
 }
 
-/* ===== 狀態圓點 ===== */
+/* 狀態圓點 */
 
 .status-dot{
 
     position:absolute;
 
-    top:18px;
+    right:20px;
 
-    right:18px;
+    top:20px;
 
     width:14px;
 
@@ -195,7 +300,9 @@ h2{
 
 }
 
-/* ===== 已完成 ===== */
+/* ==========================
+   狀態顏色
+========================== */
 
 .green{
 
@@ -209,8 +316,6 @@ h2{
 
 }
 
-/* ===== 上午 ===== */
-
 .yellow{
 
     border-color:#FACC15;
@@ -222,8 +327,6 @@ h2{
     background:#FACC15;
 
 }
-
-/* ===== 下午 ===== */
 
 .orange{
 
@@ -237,8 +340,6 @@ h2{
 
 }
 
-/* ===== 全天 ===== */
-
 .red{
 
     border-color:#EF4444;
@@ -251,7 +352,49 @@ h2{
 
 }
 
-/* ===== SweetAlert ===== */
+/* ==========================
+   Search
+========================== */
+
+#searchInput{
+
+    background:#1E293B;
+
+    border:1px solid #334155;
+
+    color:#FFFFFF;
+
+    border-radius:15px;
+
+    height:56px;
+
+    font-size:20px;
+
+    padding:0 20px;
+
+}
+
+#searchInput::placeholder{
+
+    color:#94A3B8;
+
+}
+
+#searchInput:focus{
+
+    background:#273449;
+
+    border-color:#2563EB;
+
+    color:white;
+
+    box-shadow:0 0 15px rgba(37,99,235,.35);
+
+}
+
+/* ==========================
+   SweetAlert
+========================== */
 
 .swal2-popup{
 
@@ -275,7 +418,7 @@ h2{
 
     color:white !important;
 
-    font-size:26px !important;
+    font-size:24px !important;
 
 }
 
@@ -283,9 +426,9 @@ h2{
 
     background:#2563EB !important;
 
-    font-size:22px !important;
-
     border-radius:12px !important;
+
+    font-size:22px !important;
 
 }
 
@@ -293,25 +436,51 @@ h2{
 
     background:#475569 !important;
 
-    font-size:22px !important;
-
     border-radius:12px !important;
+
+    font-size:22px !important;
 
 }
 
-/* ===== 手機 ===== */
+/* ==========================
+   手機
+========================== */
 
 @media(max-width:768px){
 
-.student-name{
+.main-title{
+
+    font-size:28px;
+
+}
+
+.sub-title{
+
+    font-size:16px;
+
+}
+
+.page-title{
+
+    font-size:22px;
+
+}
+
+.activity-date{
 
     font-size:24px;
 
 }
 
-.student-id{
+.activity-name{
 
-    font-size:15px;
+    font-size:18px;
+
+}
+
+.student-name{
+
+    font-size:24px;
 
 }
 
@@ -323,15 +492,15 @@ h2{
 
 .student-card{
 
-    min-height:145px;
-
-    padding:18px;
+    min-height:150px;
 
 }
 
 }
 
-/* ===== Scroll ===== */
+/* ==========================
+   Scrollbar
+========================== */
 
 ::-webkit-scrollbar{
 
@@ -341,7 +510,7 @@ h2{
 
 ::-webkit-scrollbar-thumb{
 
-    background:#3B82F6;
+    background:#2563EB;
 
     border-radius:20px;
 
