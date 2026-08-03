@@ -1,7 +1,6 @@
 /* ==========================================
    福瑞斯特中小學－AI校隊
-   Style.css V3（淺色校園版）
-   直接取代原 style.css
+   Style.css V4
 ========================================== */
 
 *{
@@ -11,204 +10,814 @@
 }
 
 :root{
-    --blue:#2979FF;
-    --blue2:#4F9DFF;
-    --text:#163A63;
-    --sub:#5E718A;
-    --green:#22C55E;
-    --yellow:#FACC15;
-    --orange:#FB923C;
-    --red:#EF4444;
+
+    --primary:#2F80ED;
+
+    --primary-light:#56CCF2;
+
+    --success:#27AE60;
+
+    --warning:#F2C94C;
+
+    --danger:#EB5757;
+
+    --bg:#F4F9FF;
+
+    --card:#FFFFFF;
+
+    --text:#1F3A5F;
+
+    --sub:#6B7C93;
+
+    --border:#DCEAF8;
+
 }
+
+/* ===============================
+   Body
+=============================== */
 
 body{
-    font-family:"Microsoft JhengHei",sans-serif;
-    background:linear-gradient(180deg,#F8FCFF 0%,#EEF7FF 40%,#D9ECFF 100%);
+
+    font-family:
+    "Microsoft JhengHei",
+    sans-serif;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #F8FCFF 0%,
+        #EEF6FF 55%,
+        #E3F0FF 100%
+    );
+
     color:var(--text);
+
     min-height:100vh;
-    position:relative;
-    overflow-x:hidden;
+
 }
+
+/* 背景光影 */
 
 body::before{
+
     content:"";
+
     position:fixed;
-    left:-10%;
-    bottom:-180px;
-    width:120%;
-    height:500px;
-    background:radial-gradient(ellipse at center,rgba(96,165,250,.22),transparent 70%);
+
+    left:-20%;
+
+    bottom:-220px;
+
+    width:150%;
+
+    height:650px;
+
+    background:
+
+    radial-gradient(
+
+        circle,
+
+        rgba(86,204,242,.18),
+
+        transparent 70%
+
+    );
+
     pointer-events:none;
+
     z-index:-1;
+
 }
 
-.container{max-width:1200px;}
+/* ===============================
+   Container
+=============================== */
 
-.header{text-align:center;margin:20px 0 45px;}
+.container{
+
+    max-width:1200px;
+
+}
+
+/* ===============================
+   Header
+=============================== */
+
+.header{
+
+    text-align:center;
+
+    padding:15px 0 35px;
+
+}
+
+/* ===============================
+   Logo
+=============================== */
 
 .school-logo{
-    width:360px;
-    max-width:95%;
+
+    width:340px;
+
+    max-width:90%;
+
     height:auto;
+
     display:block;
+
     margin:0 auto 25px;
-    object-fit:contain;
-    filter:drop-shadow(0 6px 20px rgba(59,130,246,.15));
+
+    transition:.3s;
+
+    filter:
+
+    drop-shadow(
+
+        0 10px 20px
+
+        rgba(47,128,237,.15)
+
+    );
+
 }
+
+.school-logo:hover{
+
+    transform:scale(1.03);
+
+}
+
+/* ===============================
+   Main Title
+=============================== */
 
 .main-title{
-    color:#153E75;
-    font-size:46px;
+
+    font-size:48px;
+
     font-weight:700;
-    margin-bottom:12px;
+
+    color:var(--text);
+
+    letter-spacing:1px;
+
+    margin-bottom:10px;
+
 }
+
+/* ===============================
+   Sub Title
+=============================== */
 
 .sub-title{
+
+    font-size:22px;
+
     color:var(--sub);
-    font-size:24px;
-    margin-bottom:40px;
+
+    margin-bottom:35px;
+
 }
+
+/* ===============================
+   Page Title
+=============================== */
 
 .page-title{
-    color:#1D4F91;
-    text-align:center;
-    font-size:32px;
-    font-weight:700;
-    margin-bottom:35px;
-}
 
-.activity-card,
-.student-card{
-    background:#fff;
-    border:1px solid #D7E8F8;
-    border-radius:24px;
-    box-shadow:0 10px 35px rgba(41,121,255,.12);
-    transition:.3s;
+    text-align:center;
+
+    font-size:32px;
+
+    font-weight:bold;
+
+    color:var(--text);
+
+    margin-bottom:35px;
+
 }
+/* ==========================================
+   Activity Card
+========================================== */
 
 .activity-card{
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:28px;
+
     padding:30px;
+
     height:100%;
+
+    transition:.3s;
+
+    cursor:pointer;
+
+    box-shadow:
+
+        0 12px 35px rgba(47,128,237,.08);
+
 }
 
-.activity-card:hover,
-.student-card:hover{
-    transform:translateY(-6px);
-    box-shadow:0 20px 45px rgba(41,121,255,.22);
+.activity-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:
+
+        0 20px 50px rgba(47,128,237,.18);
+
 }
+
+/* ========================= */
 
 .activity-date{
-    color:#143D76;
+
     font-size:36px;
+
     font-weight:700;
-    margin-bottom:12px;
+
+    color:var(--primary);
+
+    margin-bottom:10px;
+
 }
 
 .activity-name{
-    color:#5C718B;
+
     font-size:22px;
+
+    color:var(--sub);
+
     margin-bottom:25px;
+
+    line-height:1.6;
+
 }
 
 .activity-progress{
-    color:#6B7C93;
-    font-size:18px;
+
     margin-bottom:25px;
+
+    color:#6B7280;
+
+    font-size:18px;
+
 }
 
 .progress-text{
-    color:var(--green);
+
+    color:var(--success);
+
     font-size:22px;
+
     font-weight:bold;
+
 }
+
+/* ===========================
+   Button
+=========================== */
 
 .btn-start{
+
     width:100%;
+
     border:none;
+
     border-radius:16px;
-    padding:14px;
-    color:#fff;
+
+    padding:15px;
+
     font-size:20px;
-    font-weight:700;
-    background:linear-gradient(90deg,var(--blue),var(--blue2));
+
+    font-weight:bold;
+
+    color:#fff;
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            #2F80ED,
+
+            #56CCF2
+
+        );
+
+    transition:.25s;
+
 }
+
+.btn-start:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+
+        0 12px 28px rgba(47,128,237,.28);
+
+}
+
+/* ==========================================
+   Student Card
+========================================== */
 
 .student-card{
+
     position:relative;
-    padding:25px;
-    min-height:190px;
+
+    background:#FFFFFF;
+
+    border:1px solid var(--border);
+
+    border-radius:24px;
+
+    padding:24px;
+
+    min-height:200px;
+
     overflow:hidden;
+
+    transition:.3s;
+
+    cursor:pointer;
+
+    box-shadow:
+
+        0 10px 30px rgba(47,128,237,.08);
+
 }
+
+.student-card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:
+
+        0 18px 40px rgba(47,128,237,.18);
+
+}
+
+/* 左側色條 */
 
 .student-card::before{
+
     content:"";
+
     position:absolute;
+
     left:0;
+
     top:0;
+
     width:6px;
+
     height:100%;
-    background:var(--blue);
+
+    background:var(--primary);
+
 }
 
+/* ========================= */
+
 .student-id{
+
     font-size:18px;
-    color:var(--sub);
+
+    color:#7A8AA0;
+
     margin-bottom:10px;
+
 }
 
 .student-name{
+
     font-size:34px;
+
     font-weight:700;
-    color:#163A63;
+
+    color:var(--text);
+
     margin-bottom:20px;
+
 }
 
 .student-status{
+
     font-size:20px;
+
     font-weight:600;
+
 }
+
+/* ========================= */
 
 .status-dot{
+
     position:absolute;
-    top:20px;
+
     right:20px;
-    width:14px;
-    height:14px;
+
+    top:20px;
+
+    width:15px;
+
+    height:15px;
+
     border-radius:50%;
-    background:#94A3B8;
+
+    background:#B0BEC5;
+
 }
 
-.green::before{background:var(--green);}
-.yellow::before{background:var(--yellow);}
-.orange::before{background:var(--orange);}
-.red::before{background:var(--red);}
+/* ==========================================
+   Status
+========================================== */
+
+.green{
+
+    border-color:#8BE3A4;
+
+}
+
+.green::before{
+
+    background:#27AE60;
+
+}
+
+.yellow{
+
+    border-color:#FFE082;
+
+}
+
+.yellow::before{
+
+    background:#F2C94C;
+
+}
+
+.orange{
+
+    border-color:#FFCC80;
+
+}
+
+.orange::before{
+
+    background:#FB923C;
+
+}
+
+.red{
+
+    border-color:#FFB3B3;
+
+}
+
+.red::before{
+
+    background:#EB5757;
+
+}
+/* ==========================================
+   Search
+========================================== */
 
 #searchInput{
-    background:#fff;
-    border:1px solid #D7E8F8;
+
+    background:#FFFFFF;
+
+    border:2px solid var(--border);
+
     border-radius:18px;
+
     height:60px;
+
     padding:0 20px;
+
     font-size:20px;
+
+    color:var(--text);
+
+    transition:.25s;
+
+    box-shadow:
+
+        0 8px 20px rgba(47,128,237,.05);
+
+}
+
+#searchInput::placeholder{
+
+    color:#94A3B8;
+
 }
 
 #searchInput:focus{
+
     outline:none;
-    border-color:var(--blue);
-    box-shadow:0 0 15px rgba(41,121,255,.25);
+
+    border-color:var(--primary);
+
+    box-shadow:
+
+        0 0 0 4px rgba(47,128,237,.12);
+
 }
 
+/* ==========================================
+   SweetAlert
+========================================== */
+
 .swal2-popup{
-    border-radius:24px!important;
+
+    border-radius:26px !important;
+
+    background:#FFFFFF !important;
+
+    color:var(--text) !important;
+
+    padding:28px !important;
+
+    box-shadow:
+
+        0 20px 60px rgba(47,128,237,.18);
+
 }
+
+.swal2-title{
+
+    color:var(--text) !important;
+
+    font-size:34px !important;
+
+    font-weight:700 !important;
+
+}
+
+.swal2-html-container{
+
+    color:#44556C !important;
+
+    font-size:20px !important;
+
+    text-align:left;
+
+}
+
+/* ===== Radio 美化 ===== */
+
+.swal2-html-container label{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    margin:10px 0;
+
+    padding:14px 16px;
+
+    border:2px solid #E7EEF8;
+
+    border-radius:16px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    background:#FAFCFF;
+
+}
+
+.swal2-html-container label:hover{
+
+    background:#EEF6FF;
+
+    border-color:#56CCF2;
+
+}
+
+.swal2-html-container input[type="radio"]{
+
+    transform:scale(1.3);
+
+    accent-color:#2F80ED;
+
+}
+
+/* ===== 分隔線 ===== */
+
+.swal2-html-container hr{
+
+    border:none;
+
+    border-top:1px solid #E8EEF6;
+
+    margin:24px 0;
+
+}
+
+/* ===== 標題 ===== */
+
+.swal2-html-container h5{
+
+    color:#1F3A5F;
+
+    font-size:22px;
+
+    margin-bottom:12px;
+
+}
+
+/* ===== 按鈕 ===== */
+
+.swal2-confirm{
+
+    background:linear-gradient(
+
+        90deg,
+
+        #2F80ED,
+
+        #56CCF2
+
+    ) !important;
+
+    border-radius:14px !important;
+
+    font-size:18px !important;
+
+    padding:12px 30px !important;
+
+    font-weight:bold !important;
+
+}
+
+.swal2-cancel{
+
+    background:#E8EEF6 !important;
+
+    color:#42556C !important;
+
+    border-radius:14px !important;
+
+    font-size:18px !important;
+
+    padding:12px 30px !important;
+
+    font-weight:bold !important;
+
+}
+
+/* ==========================================
+   Animation
+========================================== */
+
+.activity-card,
+
+.student-card{
+
+    animation:fadeIn .35s ease;
+
+}
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(15px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ==========================================
+   Scrollbar
+========================================== */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#8CC6FF;
+
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#56CCF2;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#EEF6FF;
+
+}
+
+/* ==========================================
+   Mobile
+========================================== */
 
 @media(max-width:768px){
 
-    .school-logo{width:240px;}
-    .main-title{font-size:32px;}
-    .sub-title{font-size:18px;}
-    .page-title{font-size:26px;}
-    .activity-date{font-size:28px;}
-    .activity-name{font-size:18px;}
-    .student-name{font-size:28px;}
+    .school-logo{
+
+        width:240px;
+
+    }
+
+    .main-title{
+
+        font-size:32px;
+
+    }
+
+    .sub-title{
+
+        font-size:18px;
+
+    }
+
+    .page-title{
+
+        font-size:26px;
+
+    }
+
+    .activity-card{
+
+        padding:22px;
+
+    }
+
+    .activity-date{
+
+        font-size:28px;
+
+    }
+
+    .activity-name{
+
+        font-size:18px;
+
+    }
+
+    .student-card{
+
+        min-height:180px;
+
+        padding:20px;
+
+    }
+
+    .student-name{
+
+        font-size:28px;
+
+    }
+
+    .student-status{
+
+        font-size:18px;
+
+    }
+
+    #searchInput{
+
+        height:54px;
+
+        font-size:18px;
+
+    }
+
 }
