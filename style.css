@@ -10,8 +10,6 @@
 }
 
 :root{
-
-    /* 糖果色主題 */
     --primary:#FF6F91;      /* 泡泡糖粉 */
     --primary-dark:#F0537A;
     --secondary:#4ECDC4;    /* 薄荷綠 */
@@ -28,7 +26,6 @@
     --text:#3A3355;
     --sub:#8D86A8;
     --border:#F0E6FF;
-
 }
 
 /* ===============================
@@ -36,745 +33,262 @@
 =============================== */
 
 body{
-
-    font-family:
-    "Baloo 2","Quicksand",
-    "Microsoft JhengHei",
-    sans-serif;
-
+    font-family: "Baloo 2","Quicksand", "Microsoft JhengHei", sans-serif;
     background:
     #FFF8F0
     radial-gradient(circle at 8% 15%, rgba(255,111,145,.14), transparent 40%)
     radial-gradient(circle at 92% 10%, rgba(78,205,196,.16), transparent 42%)
     radial-gradient(circle at 15% 90%, rgba(255,209,102,.18), transparent 45%)
     radial-gradient(circle at 90% 85%, rgba(155,135,245,.14), transparent 45%);
-
     color:var(--text);
-
     min-height:100vh;
-
     overflow-x:hidden;
-
 }
-
-/* 飄浮小星星裝飾 */
 
 body::before,
 body::after{
-
     content:"✦";
-
     position:fixed;
-
     font-size:38px;
-
     color:var(--yellow);
-
     opacity:.5;
-
     pointer-events:none;
-
     animation:float 6s ease-in-out infinite;
-
     z-index:-1;
-
 }
 
-body::before{
-    left:6%;
-    top:12%;
-}
-
-body::after{
-    right:8%;
-    top:20%;
-    content:"❀";
-    color:var(--primary);
-    animation-delay:1.5s;
-}
+body::before{ left:6%; top:12%; }
+body::after{ right:8%; top:20%; content:"❀"; color:var(--primary); animation-delay:1.5s; }
 
 @keyframes float{
     0%,100%{ transform:translateY(0) rotate(0deg); }
     50%{ transform:translateY(-18px) rotate(12deg); }
 }
 
-/* ===============================
-   Container
-=============================== */
-
-.container{
-
-    max-width:1200px;
-
-}
+.container{ max-width:1200px; }
 
 /* ===============================
-   Header
+   Header & Titles
 =============================== */
 
-.header{
-
-    text-align:center;
-
-    padding:20px 0 35px;
-
-    position:relative;
-
-}
-
-/* ===============================
-   Logo
-=============================== */
+.header{ text-align:center; padding:20px 0 35px; position:relative; }
 
 .school-logo{
-
     width:320px;
-
     max-width:85%;
-
     height:auto;
-
     display:block;
-
     margin:0 auto 20px;
-
     transition:.35s cubic-bezier(.34,1.56,.64,1);
-
-    filter:
-
-    drop-shadow(
-
-        0 10px 18px
-
-        rgba(255,111,145,.25)
-
-    );
-
+    filter: drop-shadow(0 10px 18px rgba(255,111,145,.25));
 }
 
-.school-logo:hover{
+.school-logo:hover{ transform:scale(1.06) rotate(-2deg); }
 
-    transform:scale(1.06) rotate(-2deg);
-
-}
-
-/* ===============================
-   Main Title
-=============================== */
-
-.main-title{
-
-    font-size:44px;
-
-    font-weight:800;
-
-    color:var(--text);
-
-    letter-spacing:1px;
-
-    margin-bottom:8px;
-
-}
-
-/* ===============================
-   Sub Title
-=============================== */
+.main-title{ font-size:44px; font-weight:800; color:var(--text); letter-spacing:1px; margin-bottom:8px; }
 
 .sub-title{
-
     display:inline-block;
-
     font-size:18px;
-
     font-weight:700;
-
     color:var(--primary-dark);
-
     margin-bottom:10px;
-
     background:#FFE4EC;
-
     padding:8px 24px;
-
     border-radius:999px;
-
     border:2px dashed var(--primary);
-
 }
 
-/* ===============================
-   Page Title
-=============================== */
-
-.page-title{
-
-    text-align:center;
-
-    font-size:30px;
-
-    font-weight:800;
-
-    color:var(--text);
-
-    margin-bottom:35px;
-
-}
+.page-title{ text-align:center; font-size:30px; font-weight:800; color:var(--text); margin-bottom:35px; }
 
 .page-title::after{
-
     content:"";
-
     display:block;
-
     width:70px;
-
     height:6px;
-
     margin:10px auto 0;
-
     border-radius:10px;
-
     background:linear-gradient(90deg,var(--primary),var(--yellow));
-
 }
+
 /* ==========================================
-   Activity Card
+   Cards
 ========================================== */
 
 .activity-card{
-
     background:var(--card);
-
     border:3px solid var(--border);
-
     border-radius:32px;
-
     padding:30px;
-
     height:100%;
-
     transition:.3s cubic-bezier(.34,1.56,.64,1);
-
     cursor:pointer;
-
     position:relative;
-
     overflow:hidden;
-
-    box-shadow:
-
-        0 12px 0 rgba(255,111,145,.12),
-        0 12px 30px rgba(155,135,245,.12);
-
-}
-
-.activity-card::after{
-
-    content:"🎈";
-
-    position:absolute;
-
-    right:-10px;
-
-    bottom:-15px;
-
-    font-size:90px;
-
-    opacity:.08;
-
-    transform:rotate(-10deg);
-
-    pointer-events:none;
-
+    box-shadow: 0 12px 0 rgba(255,111,145,.12), 0 12px 30px rgba(155,135,245,.12);
 }
 
 .activity-card:hover{
-
     transform:translateY(-8px) rotate(-1deg);
-
     border-color:var(--primary);
-
-    box-shadow:
-
-        0 16px 0 rgba(255,111,145,.18),
-        0 24px 45px rgba(155,135,245,.22);
-
+    box-shadow: 0 16px 0 rgba(255,111,145,.18), 0 24px 45px rgba(155,135,245,.22);
 }
-
-/* ========================= */
 
 .activity-date{
-
     display:inline-block;
-
     font-size:26px;
-
     font-weight:800;
-
     color:#fff;
-
     margin-bottom:14px;
-
     background:linear-gradient(90deg,var(--primary),var(--purple));
-
     padding:6px 20px;
-
     border-radius:14px;
-
 }
 
-.activity-name{
-
-    font-size:22px;
-
-    font-weight:700;
-
-    color:var(--text);
-
-    margin-bottom:22px;
-
-    line-height:1.6;
-
-}
-
-.activity-progress{
-
-    margin-bottom:22px;
-
-    color:var(--sub);
-
-    font-size:17px;
-
-    font-weight:600;
-
-}
-
-.progress-text{
-
-    color:var(--success);
-
-    font-size:22px;
-
-    font-weight:800;
-
-}
-
-/* ===========================
-   Button
-=========================== */
+.activity-name{ font-size:22px; font-weight:700; color:var(--text); margin-bottom:22px; line-height:1.6; }
+.activity-progress{ margin-bottom:22px; color:var(--sub); font-size:17px; font-weight:600; }
+.progress-text{ color:var(--success); font-size:22px; font-weight:800; }
 
 .btn-start{
-
     width:100%;
-
     border:none;
-
     border-radius:999px;
-
     padding:15px;
-
     font-size:19px;
-
     font-weight:800;
-
     color:#fff;
-
-    background:
-
-        linear-gradient(
-
-            90deg,
-
-            var(--primary),
-
-            var(--purple)
-
-        );
-
+    background: linear-gradient(90deg, var(--primary), var(--purple));
     box-shadow:0 6px 0 var(--primary-dark);
-
     transition:.15s;
-
 }
 
-.btn-start:hover{
-
-    transform:translateY(-3px);
-
-    box-shadow:0 9px 0 var(--primary-dark);
-
-    filter:brightness(1.05);
-
-}
-
-.btn-start:active{
-
-    transform:translateY(2px);
-
-    box-shadow:0 3px 0 var(--primary-dark);
-
-}
-
-/* ==========================================
-   Student Card
-========================================== */
+.btn-start:hover{ transform:translateY(-3px); box-shadow:0 9px 0 var(--primary-dark); filter:brightness(1.05); }
+.btn-start:active{ transform:translateY(2px); box-shadow:0 3px 0 var(--primary-dark); }
 
 .student-card{
-
     position:relative;
-
     background:#FFFFFF;
-
     border:3px solid var(--border);
-
     border-radius:28px;
-
     padding:24px;
-
     min-height:200px;
-
     overflow:hidden;
-
     transition:.3s cubic-bezier(.34,1.56,.64,1);
-
     cursor:pointer;
-
-    box-shadow:
-
-        0 10px 0 rgba(155,135,245,.10),
-        0 10px 26px rgba(155,135,245,.14);
-
+    box-shadow: 0 10px 0 rgba(155,135,245,.10), 0 10px 26px rgba(155,135,245,.14);
 }
 
 .student-card:hover{
-
     transform:translateY(-6px) scale(1.02);
-
-    box-shadow:
-
-        0 14px 0 rgba(155,135,245,.16),
-        0 20px 34px rgba(155,135,245,.2);
-
+    box-shadow: 0 14px 0 rgba(155,135,245,.16), 0 20px 34px rgba(155,135,245,.2);
 }
-
-/* 左側圓角色塊，取代直角色條 */
 
 .student-card::before{
-
     content:"";
-
     position:absolute;
-
     left:14px;
-
     top:14px;
-
     width:14px;
-
     height:14px;
-
     border-radius:50%;
-
     background:#B0BEC5;
-
 }
 
-/* ========================= */
-
-.student-id{
-
-    font-size:16px;
-
-    font-weight:700;
-
-    color:var(--sub);
-
-    margin-bottom:8px;
-
-    margin-left:26px;
-
-}
-
-.student-name{
-
-    font-size:30px;
-
-    font-weight:800;
-
-    color:var(--text);
-
-    margin-bottom:18px;
-
-    margin-left:26px;
-
-}
-
-.student-status{
-
-    font-size:18px;
-
-    font-weight:700;
-
-    display:inline-block;
-
-    padding:6px 16px;
-
-    border-radius:999px;
-
-    background:#F3F0FF;
-
-}
-
-/* ========================= */
+.student-id{ font-size:16px; font-weight:700; color:var(--sub); margin-bottom:8px; margin-left:26px; }
+.student-name{ font-size:30px; font-weight:800; color:var(--text); margin-bottom:18px; margin-left:26px; }
+.student-status{ font-size:18px; font-weight:700; display:inline-block; padding:6px 16px; border-radius:999px; background:#F3F0FF; }
 
 .status-dot{
-
     position:absolute;
-
     right:18px;
-
     top:18px;
-
     width:16px;
-
     height:16px;
-
     border-radius:50%;
-
     background:#B0BEC5;
-
     box-shadow:0 0 0 4px #F4F1FB;
-
 }
 
 /* ==========================================
-   Status
+   Status Colors
 ========================================== */
 
-.green{
-    border-color:#AEEBCB;
-    background:#F3FFF8;
-}
+.green{ border-color:#AEEBCB; background:#F3FFF8; }
 .green::before{ background:#3DD598; }
 .green .student-status{ background:#DFFAEC; color:#1E9E68; }
 
-.yellow{
-    border-color:#FFE8B0;
-    background:#FFFCF3;
-}
+.yellow{ border-color:#FFE8B0; background:#FFFCF3; }
 .yellow::before{ background:#FFC94D; }
 .yellow .student-status{ background:#FFF2D2; color:#B9860B; }
 
-.orange{
-    border-color:#FFD4B0;
-    background:#FFF9F3;
-}
+.orange{ border-color:#FFD4B0; background:#FFF9F3; }
 .orange::before{ background:#FF9F5A; }
 .orange .student-status{ background:#FFE8D6; color:#D6641C; }
 
-.red{
-    border-color:#FFC3C3;
-    background:#FFF6F6;
-}
+.red{ border-color:#FFC3C3; background:#FFF6F6; }
 .red::before{ background:#FF6B6B; }
 .red .student-status{ background:#FFE0E0; color:#E03C3C; }
 
 /* ==========================================
-   Search
+   Search Input
 ========================================== */
 
 #searchInput{
-
     background:#FFFFFF;
-
     border:3px solid var(--border);
-
     border-radius:999px;
-
     height:58px;
-
     padding:0 26px;
-
     font-size:19px;
-
     font-weight:600;
-
     color:var(--text);
-
     transition:.25s;
-
-    box-shadow:
-
-        0 6px 16px rgba(155,135,245,.08);
-
+    box-shadow: 0 6px 16px rgba(155,135,245,.08);
 }
 
-#searchInput::placeholder{
-
-    color:#B7AFD6;
-
-}
-
-#searchInput:focus{
-
-    outline:none;
-
-    border-color:var(--primary);
-
-    box-shadow:
-
-        0 0 0 5px rgba(255,111,145,.15);
-
-}
+#searchInput::placeholder{ color:#B7AFD6; }
+#searchInput:focus{ outline:none; border-color:var(--primary); box-shadow: 0 0 0 5px rgba(255,111,145,.15); }
 
 /* ==========================================
-   SweetAlert
+   SweetAlert Popups
 ========================================== */
 
 .swal2-popup{
-
     border-radius:32px !important;
-
     background:#FFFDF9 !important;
-
     color:var(--text) !important;
-
     padding:30px !important;
-
     border:4px solid #FFE4EC !important;
-
-    box-shadow:
-
-        0 20px 0 rgba(255,111,145,.10),
-        0 24px 60px rgba(155,135,245,.2) !important;
-
+    box-shadow: 0 20px 0 rgba(255,111,145,.10), 0 24px 60px rgba(155,135,245,.2) !important;
 }
 
-.swal2-title{
+.swal2-title{ color:var(--text) !important; font-size:32px !important; font-weight:800 !important; }
+.swal2-html-container{ color:#44556C !important; font-size:19px !important; text-align:left; }
+.swal2-html-container h5{ color:var(--text); font-size:20px; font-weight:800; margin-bottom:14px; }
+.swal2-html-container hr{ border:none; border-top:3px dashed #F0E6FF; margin:22px 0; }
 
-    color:var(--text) !important;
-
-    font-size:32px !important;
-
-    font-weight:800 !important;
-
-}
-
-.swal2-html-container{
-
-    color:#44556C !important;
-
-    font-size:19px !important;
-
-    text-align:left;
-
-}
-
-/* ===== 區塊標題 ===== */
-
-.swal2-html-container h5{
-
-    color:var(--text);
-
-    font-size:20px;
-
-    font-weight:800;
-
-    margin-bottom:14px;
-
-}
-
-/* ===== 分隔線 ===== */
-
-.swal2-html-container hr{
-
-    border:none;
-
-    border-top:3px dashed #F0E6FF;
-
-    margin:22px 0;
-
-}
-
-/* ===== Chip 選項（取代原本呆板的 radio） ===== */
-
-.chip-group{
-
-    display:flex;
-
-    flex-wrap:wrap;
-
-    gap:10px;
-
-    margin:0 0 6px;
-
-}
+.chip-group{ display:flex; flex-wrap:wrap; gap:10px; margin:0 0 6px; }
 
 .swal2-html-container label.chip{
-
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
     gap:8px;
-
     margin:0;
-
     padding:12px 18px;
-
     border:3px solid #EFE9FB;
-
     border-radius:999px;
-
     cursor:pointer;
-
     transition:.2s cubic-bezier(.34,1.56,.64,1);
-
     background:#FAF8FF;
-
     font-weight:700;
-
     font-size:17px;
-
     flex:0 0 auto;
-
 }
 
-.swal2-html-container label.chip:hover{
-
-    transform:translateY(-2px) scale(1.03);
-
-    background:#F3EEFF;
-
-    border-color:var(--purple);
-
-}
-
-.swal2-html-container label.chip input[type="radio"]{
-
-    position:absolute;
-
-    opacity:0;
-
-    width:0;
-
-    height:0;
-
-}
-
-.swal2-html-container label.chip:has(input:checked){
-
-    color:#fff;
-
-    transform:translateY(-2px) scale(1.05);
-
-    box-shadow:0 6px 14px rgba(155,135,245,.35);
-
-}
-
-/* 各分類選中後的糖果配色 */
+.swal2-html-container label.chip:hover{ transform:translateY(-2px) scale(1.03); background:#F3EEFF; border-color:var(--purple); }
+.swal2-html-container label.chip input[type="radio"]{ position:absolute; opacity:0; width:0; height:0; }
+.swal2-html-container label.chip:has(input:checked){ color:#fff; transform:translateY(-2px) scale(1.05); box-shadow:0 6px 14px rgba(155,135,245,.35); }
 
 .chip[data-color="green"]:has(input:checked){ background:#3DD598; border-color:#3DD598; }
 .chip[data-color="yellow"]:has(input:checked){ background:#FFC94D; border-color:#FFC94D; }
@@ -783,198 +297,30 @@ body::after{
 .chip[data-color="teal"]:has(input:checked){ background:#4ECDC4; border-color:#4ECDC4; }
 .chip[data-color="pink"]:has(input:checked){ background:#FF6F91; border-color:#FF6F91; }
 
-/* ===== 按鈕 ===== */
-
 .swal2-confirm{
-
-    background:linear-gradient(
-
-        90deg,
-
-        var(--primary),
-
-        var(--purple)
-
-    ) !important;
-
+    background:linear-gradient( 90deg, var(--primary), var(--purple) ) !important;
     border-radius:999px !important;
-
     font-size:18px !important;
-
     padding:13px 32px !important;
-
     font-weight:800 !important;
-
     box-shadow:0 6px 0 var(--primary-dark) !important;
-
 }
 
-.swal2-confirm:hover{
+.swal2-confirm:hover{ transform:translateY(-2px); }
+.swal2-cancel{ background:#F3F0FF !important; color:#7A6FB0 !important; border-radius:999px !important; font-size:18px !important; padding:13px 32px !important; font-weight:800 !important; }
 
-    transform:translateY(-2px);
-
-}
-
-.swal2-cancel{
-
-    background:#F3F0FF !important;
-
-    color:#7A6FB0 !important;
-
-    border-radius:999px !important;
-
-    font-size:18px !important;
-
-    padding:13px 32px !important;
-
-    font-weight:800 !important;
-
-}
-
-/* ==========================================
-   Animation
-========================================== */
-
-.activity-card,
-
-.student-card{
-
-    animation:fadeIn .35s ease;
-
-}
-
-@keyframes fadeIn{
-
-    from{
-
-        opacity:0;
-
-        transform:translateY(15px);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:translateY(0);
-
-    }
-
-}
-
-/* ==========================================
-   Scrollbar
-========================================== */
-
-::-webkit-scrollbar{
-
-    width:10px;
-
-}
-
-::-webkit-scrollbar-thumb{
-
-    background:var(--primary);
-
-    border-radius:20px;
-
-}
-
-::-webkit-scrollbar-thumb:hover{
-
-    background:var(--purple);
-
-}
-
-::-webkit-scrollbar-track{
-
-    background:#FFF3F6;
-
-}
-
-/* ==========================================
-   Mobile
-========================================== */
-
+/* Responsive */
 @media(max-width:768px){
-
-    .school-logo{
-
-        width:220px;
-
-    }
-
-    .main-title{
-
-        font-size:28px;
-
-    }
-
-    .sub-title{
-
-        font-size:15px;
-
-    }
-
-    .page-title{
-
-        font-size:24px;
-
-    }
-
-    .activity-card{
-
-        padding:22px;
-
-    }
-
-    .activity-date{
-
-        font-size:22px;
-
-    }
-
-    .activity-name{
-
-        font-size:18px;
-
-    }
-
-    .student-card{
-
-        min-height:180px;
-
-        padding:20px;
-
-    }
-
-    .student-name{
-
-        font-size:24px;
-
-    }
-
-    .student-status{
-
-        font-size:16px;
-
-    }
-
-    #searchInput{
-
-        height:52px;
-
-        font-size:17px;
-
-    }
-
-    .swal2-html-container label.chip{
-
-        font-size:15px;
-
-        padding:10px 14px;
-
-    }
-
+    .school-logo{ width:220px; }
+    .main-title{ font-size:28px; }
+    .sub-title{ font-size:15px; }
+    .page-title{ font-size:24px; }
+    .activity-card{ padding:22px; }
+    .activity-date{ font-size:22px; }
+    .activity-name{ font-size:18px; }
+    .student-card{ min-height:180px; padding:20px; }
+    .student-name{ font-size:24px; }
+    .student-status{ font-size:16px; }
+    #searchInput{ height:52px; font-size:17px; }
+    .swal2-html-container label.chip{ font-size:15px; padding:10px 14px; }
 }
