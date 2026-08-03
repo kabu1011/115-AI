@@ -4,7 +4,7 @@
 // ===============================
 
 // 修改成你的 Apps Script Web App
-const API_URL = "YOUR_APPS_SCRIPT_URL";
+const API_URL = "https://script.google.com/macros/s/AKfycbxPP-qxjl58Y8G4ozxpphw73z_8d2iM5oj4CgQ1WVPmWddg6O2yeiorxE_2ptZlDww/exec";
 
 // 學生資料
 let students = [];
