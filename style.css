@@ -1,6 +1,7 @@
 /* ==========================================
    福瑞斯特中小學－AI校隊
-   Version 2.0
+   Style.css V3（淺色校園版）
+   直接取代原 style.css
 ========================================== */
 
 *{
@@ -10,661 +11,204 @@
 }
 
 :root{
-
-    --bg:#081120;
-
-    --card:#122033;
-
-    --card2:#16263C;
-
-    --blue:#3B82F6;
-
+    --blue:#2979FF;
+    --blue2:#4F9DFF;
+    --text:#163A63;
+    --sub:#5E718A;
     --green:#22C55E;
-
     --yellow:#FACC15;
-
     --orange:#FB923C;
-
     --red:#EF4444;
-
-    --text:#FFFFFF;
-
-    --sub:#CBD5E1;
-
 }
 
 body{
-
     font-family:"Microsoft JhengHei",sans-serif;
-
-    background:
-    radial-gradient(circle at top,#183B66,#081120);
-
+    background:linear-gradient(180deg,#F8FCFF 0%,#EEF7FF 40%,#D9ECFF 100%);
     color:var(--text);
-
     min-height:100vh;
-
+    position:relative;
+    overflow-x:hidden;
 }
 
-/* ========================= */
-
-.container{
-
-    max-width:1200px;
-
+body::before{
+    content:"";
+    position:fixed;
+    left:-10%;
+    bottom:-180px;
+    width:120%;
+    height:500px;
+    background:radial-gradient(ellipse at center,rgba(96,165,250,.22),transparent 70%);
+    pointer-events:none;
+    z-index:-1;
 }
 
-/* =========================
-   Header
-========================= */
+.container{max-width:1200px;}
 
-.header{
-
-    text-align:center;
-
-    margin:10px 0 35px;
-
-}
-
-/* =========================
-   Logo
-========================= */
+.header{text-align:center;margin:20px 0 45px;}
 
 .school-logo{
-
-    width:320px;
-
+    width:360px;
     max-width:95%;
-
     height:auto;
-
     display:block;
-
     margin:0 auto 25px;
-
     object-fit:contain;
-
-    transition:.3s;
-
-    filter:
-
-    drop-shadow(
-
-        0 8px 30px
-
-        rgba(59,130,246,.45)
-
-    );
-
+    filter:drop-shadow(0 6px 20px rgba(59,130,246,.15));
 }
-
-.school-logo:hover{
-
-    transform:scale(1.05);
-
-}
-
-/* ========================= */
 
 .main-title{
-
+    color:#153E75;
     font-size:46px;
-
     font-weight:700;
-
-    letter-spacing:2px;
-
-    margin-bottom:8px;
-
+    margin-bottom:12px;
 }
 
 .sub-title{
-
     color:var(--sub);
-
     font-size:24px;
-
-    margin-bottom:35px;
-
+    margin-bottom:40px;
 }
-
-/* ========================= */
 
 .page-title{
-
+    color:#1D4F91;
     text-align:center;
-
-    font-size:30px;
-
-    font-weight:bold;
-
-    margin-bottom:30px;
-
+    font-size:32px;
+    font-weight:700;
+    margin-bottom:35px;
 }
 
-/* =========================
-   Activity Card
-========================= */
+.activity-card,
+.student-card{
+    background:#fff;
+    border:1px solid #D7E8F8;
+    border-radius:24px;
+    box-shadow:0 10px 35px rgba(41,121,255,.12);
+    transition:.3s;
+}
 
 .activity-card{
-
-    background:
-
-    rgba(18,32,51,.88);
-
-    backdrop-filter:blur(15px);
-
-    border:
-
-    1px solid
-
-    rgba(255,255,255,.08);
-
-    border-radius:24px;
-
     padding:30px;
-
-    cursor:pointer;
-
-    transition:.3s;
-
     height:100%;
-
 }
 
-.activity-card:hover{
-
-    transform:
-
-    translateY(-6px);
-
-    border-color:var(--blue);
-
-    box-shadow:
-
-    0 20px 45px
-
-    rgba(59,130,246,.35);
-
+.activity-card:hover,
+.student-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 45px rgba(41,121,255,.22);
 }
 
 .activity-date{
-
-    font-size:34px;
-
-    font-weight:bold;
-
+    color:#143D76;
+    font-size:36px;
+    font-weight:700;
     margin-bottom:12px;
-
 }
 
 .activity-name{
-
+    color:#5C718B;
     font-size:22px;
-
-    color:var(--sub);
-
     margin-bottom:25px;
-
 }
 
 .activity-progress{
-
+    color:#6B7C93;
     font-size:18px;
-
-    color:var(--sub);
-
     margin-bottom:25px;
-
 }
 
 .progress-text{
-
     color:var(--green);
-
     font-size:22px;
-
     font-weight:bold;
-
 }
-
-/* ========================= */
 
 .btn-start{
-
     width:100%;
-
     border:none;
-
     border-radius:16px;
-
     padding:14px;
-
+    color:#fff;
     font-size:20px;
-
-    font-weight:bold;
-
-    color:white;
-
-    background:
-
-    linear-gradient(
-
-        90deg,
-
-        #2563EB,
-
-        #3B82F6
-
-    );
-
-    transition:.3s;
-
+    font-weight:700;
+    background:linear-gradient(90deg,var(--blue),var(--blue2));
 }
-
-.btn-start:hover{
-
-    transform:translateY(-2px);
-
-    box-shadow:
-
-    0 10px 25px
-
-    rgba(59,130,246,.45);
-
-}
-/* ==========================================
-   Student Card
-========================================== */
 
 .student-card{
-
     position:relative;
-
-    background:rgba(18,32,51,.88);
-
-    backdrop-filter:blur(15px);
-
-    border:1px solid rgba(255,255,255,.08);
-
-    border-radius:24px;
-
     padding:25px;
-
     min-height:190px;
-
-    cursor:pointer;
-
-    transition:.3s;
-
     overflow:hidden;
-
-}
-
-.student-card:hover{
-
-    transform:translateY(-6px);
-
-    border-color:var(--blue);
-
-    box-shadow:0 20px 40px rgba(59,130,246,.35);
-
 }
 
 .student-card::before{
-
     content:"";
-
     position:absolute;
-
     left:0;
-
     top:0;
-
     width:6px;
-
     height:100%;
-
     background:var(--blue);
-
 }
 
-/* ==========================
-   Student
-========================== */
-
 .student-id{
-
     font-size:18px;
-
     color:var(--sub);
-
     margin-bottom:10px;
-
 }
 
 .student-name{
-
     font-size:34px;
-
     font-weight:700;
-
-    color:white;
-
+    color:#163A63;
     margin-bottom:20px;
-
-    word-break:break-all;
-
 }
 
 .student-status{
-
     font-size:20px;
-
     font-weight:600;
-
 }
 
 .status-dot{
-
     position:absolute;
-
     top:20px;
-
     right:20px;
-
     width:14px;
-
     height:14px;
-
     border-radius:50%;
-
-    background:#64748B;
-
+    background:#94A3B8;
 }
 
-/* ==========================
-   Status Color
-========================== */
-
-.green{
-
-    border-color:var(--green);
-
-}
-
-.green::before{
-
-    background:var(--green);
-
-}
-
-.yellow{
-
-    border-color:var(--yellow);
-
-}
-
-.yellow::before{
-
-    background:var(--yellow);
-
-}
-
-.orange{
-
-    border-color:var(--orange);
-
-}
-
-.orange::before{
-
-    background:var(--orange);
-
-}
-
-.red{
-
-    border-color:var(--red);
-
-}
-
-.red::before{
-
-    background:var(--red);
-
-}
-
-/* ==========================
-   Search
-========================== */
+.green::before{background:var(--green);}
+.yellow::before{background:var(--yellow);}
+.orange::before{background:var(--orange);}
+.red::before{background:var(--red);}
 
 #searchInput{
-
-    background:rgba(18,32,51,.9);
-
-    border:1px solid rgba(255,255,255,.08);
-
-    color:white;
-
+    background:#fff;
+    border:1px solid #D7E8F8;
     border-radius:18px;
-
     height:60px;
-
     padding:0 20px;
-
     font-size:20px;
-
-    transition:.25s;
-
-}
-
-#searchInput::placeholder{
-
-    color:#94A3B8;
-
 }
 
 #searchInput:focus{
-
-    background:#16263C;
-
-    border-color:var(--blue);
-
     outline:none;
-
-    color:white;
-
-    box-shadow:0 0 15px rgba(59,130,246,.35);
-
+    border-color:var(--blue);
+    box-shadow:0 0 15px rgba(41,121,255,.25);
 }
-
-/* ==========================
-   SweetAlert
-========================== */
 
 .swal2-popup{
-
-    background:#122033 !important;
-
-    color:white !important;
-
-    border-radius:24px !important;
-
+    border-radius:24px!important;
 }
-
-.swal2-title{
-
-    font-size:34px !important;
-
-    color:white !important;
-
-}
-
-.swal2-html-container{
-
-    font-size:22px !important;
-
-    color:white !important;
-
-}
-
-.swal2-confirm{
-
-    background:#2563EB !important;
-
-    border-radius:12px !important;
-
-    font-size:20px !important;
-
-    padding:10px 28px !important;
-
-}
-
-.swal2-cancel{
-
-    background:#475569 !important;
-
-    border-radius:12px !important;
-
-    font-size:20px !important;
-
-    padding:10px 28px !important;
-
-}
-
-.swal2-html-container label{
-
-    display:block;
-
-    margin:12px 0;
-
-    font-size:22px;
-
-}
-
-/* ==========================
-   Animation
-========================== */
-
-.activity-card,
-
-.student-card{
-
-    animation:fadeIn .35s ease;
-
-}
-
-@keyframes fadeIn{
-
-    from{
-
-        opacity:0;
-
-        transform:translateY(15px);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:translateY(0);
-
-    }
-
-}
-
-/* ==========================
-   Scrollbar
-========================== */
-
-::-webkit-scrollbar{
-
-    width:8px;
-
-}
-
-::-webkit-scrollbar-thumb{
-
-    background:#3B82F6;
-
-    border-radius:20px;
-
-}
-
-::-webkit-scrollbar-track{
-
-    background:#081120;
-
-}
-
-/* ==========================
-   Mobile
-========================== */
 
 @media(max-width:768px){
 
-    .school-logo{
-
-        width:220px;
-
-    }
-
-    .main-title{
-
-        font-size:30px;
-
-    }
-
-    .sub-title{
-
-        font-size:18px;
-
-    }
-
-    .page-title{
-
-        font-size:24px;
-
-    }
-
-    .activity-date{
-
-        font-size:26px;
-
-    }
-
-    .activity-name{
-
-        font-size:18px;
-
-    }
-
-    .student-name{
-
-        font-size:28px;
-
-    }
-
-    .student-status{
-
-        font-size:18px;
-
-    }
-
-    .student-card{
-
-        min-height:170px;
-
-    }
-
-    #searchInput{
-
-        font-size:18px;
-
-        height:55px;
-
-    }
-
+    .school-logo{width:240px;}
+    .main-title{font-size:32px;}
+    .sub-title{font-size:18px;}
+    .page-title{font-size:26px;}
+    .activity-date{font-size:28px;}
+    .activity-name{font-size:18px;}
+    .student-name{font-size:28px;}
 }
