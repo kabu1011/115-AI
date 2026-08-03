@@ -4,7 +4,7 @@
 // ==========================================
 
 const API_URL =
-"https://你的AppsScript網址/exec";
+"https://script.google.com/macros/s/AKfycbxPP-qxjl58Y8G4ozxpphw73z_8d2iM5oj4CgQ1WVPmWddg6O2yeiorxE_2ptZlDww/exec";
 
 //==============================
 // 全域變數
