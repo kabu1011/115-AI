@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI校隊每日確認</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container py-4">
+
+    <!-- 標題 -->
+    <div class="text-center mb-4">
+
+        <h2 class="fw-bold">
+            🌲 AI 校隊每日確認
+        </h2>
+
+        <div id="today" class="text-secondary"></div>
+
+    </div>
+
+    <!-- 搜尋 -->
+    <div class="mb-4">
+
+        <input
+            type="text"
+            id="searchInput"
+            class="form-control form-control-lg"
+            placeholder="🔍 搜尋 StudentID 或 姓名">
+
+    </div>
+
+    <!-- 學生清單 -->
+    <div id="studentList"></div>
+
+</div>
+
+
+<!-- ===== 學生卡片 Template ===== -->
+
+<template id="studentTemplate">
+
+<div class="student-card">
+
+    <div class="student-header">
+
+        <div class="student-info">
+
+            <div class="student-id"></div>
+
+            <div class="student-name"></div>
+
+        </div>
+
+        <button class="toggle-btn">
+
+            <i class="fa-solid fa-chevron-down"></i>
+
+        </button>
+
+    </div>
+
+    <div class="student-body">
+
+        <hr>
+
+        <h5>今日狀態</h5>
+
+        <div class="status-group">
+
+            <label>
+
+                <input
+                    type="radio"
+                    value="參加"
+                    class="status-radio">
+
+                🟢 參加
+
+            </label>
+
+            <label>
+
+                <input
+                    type="radio"
+                    value="上午請假"
+                    class="status-radio">
+
+                🟡 上午請假
+
+            </label>
+
+            <label>
+
+                <input
+                    type="radio"
+                    value="下午請假"
+                    class="status-radio">
+
+                🟠 下午請假
+
+            </label>
+
+            <label>
+
+                <input
+                    type="radio"
+                    value="全天請假"
+                    class="status-radio">
+
+                🔴 全天請假
+
+            </label>
+
+        </div>
+
+        <hr>
+
+        <h5>🍱 午餐</h5>
+
+        <div class="lunch-group">
+
+            <label>
+
+                <input
+                    type="radio"
+                    value="需要"
+                    class="lunch-radio">
+
+                🍱 需要
+
+            </label>
+
+            <label>
+
+                <input
+                    type="radio"
+                    value="不需要"
+                    class="lunch-radio">
+
+                🚫 不需要
+
+            </label>
+
+        </div>
+
+        <div class="d-grid mt-4">
+
+            <button class="btn btn-success submit-btn">
+
+                <i class="fa-solid fa-paper-plane"></i>
+
+                確認送出
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+</template>
+
+
+<!-- Bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- JavaScript -->
+<script src="script.js"></script>
+
+</body>
+</html>
