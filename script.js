@@ -1,6 +1,6 @@
 // ==========================================
 // 福瑞斯特中小學－AI校隊
-// Script.js V3 - Fixed Version
+// Script.js V3
 // ==========================================
 
 const API_URL = "https://script.google.com/macros/s/AKfycbxPP-qxjl58Y8G4ozxpphw73z_8d2iM5oj4CgQ1WVPmWddg6O2yeiorxE_2ptZlDww/exec";
@@ -16,7 +16,7 @@ let currentActivity = null;
 document.addEventListener("DOMContentLoaded", () => {
     loadActivities();
 
-    // 關鍵修復：綁定搜尋框監聽事件
+    // 搜尋框即時過濾
     const searchInput = document.getElementById("searchInput");
     if (searchInput) {
         searchInput.addEventListener("input", (e) => {
@@ -49,13 +49,11 @@ async function loadActivities() {
 
     try {
         const response = await fetch(API_URL + "?action=getActivities");
-        if (!response.ok) throw new Error("HTTP error " + response.status);
-        
         activities = await response.json();
         renderActivities();
     } catch(error) {
-        console.error("載入活動失敗:", error);
-        Swal.fire("錯誤", "無法取得活動資料，請確認 API 網址與 Apps Script 部署權限設定為「所有人」。", "error");
+        console.error(error);
+        Swal.fire("錯誤", "無法取得活動資料", "error");
     }
 }
 
@@ -93,7 +91,6 @@ async function openActivity(activity){
     document.getElementById("studentPage").style.display = "block";
     document.getElementById("activityTitle").innerHTML = activity.Title + "<br><small>" + activity.Date + "</small>";
 
-    // 清空搜尋框
     const searchInput = document.getElementById("searchInput");
     if (searchInput) searchInput.value = "";
 
@@ -123,11 +120,13 @@ async function loadStudents(){
     `;
 
     try {
-        const response = await fetch(API_URL + "?action=getStudents&activityId=" + currentActivity.ActivityID);
+        const response = await fetch(
+            API_URL + "?action=getStudents&activityId=" + currentActivity.ActivityID
+        );
         students = await response.json();
         renderStudents(students);
     } catch(error) {
-        console.error("載入學生失敗:", error);
+        console.error(error);
         Swal.fire("錯誤", "無法取得學生資料", "error");
     }
 }
@@ -160,7 +159,7 @@ function renderStudents(data){
 }
 
 //==========================================
-// 開啟學生資料
+// 開啟學生資料 (已修正顯示標題為 30102吳奕霖)
 //==========================================
 
 async function openStudent(student){
@@ -168,10 +167,12 @@ async function openStudent(student){
     const lunch = student.Lunch || "需要";
     const meal = student.Meal || "葷";
 
+    // 組合學號與姓名 (如：30102吳奕霖)
+    const displayName = `${student.StudentID}${student.Name}`;
+
     const { value } = await Swal.fire({
         width: 650,
-        title: `<div style="font-size:34px;font-weight:bold;">${student.Name}</div>
-                <div style="font-size:18px;color:#64748B;margin-top:8px;">${student.StudentID}</div>`,
+        title: `<div style="font-size:36px; font-weight:800; color:var(--text); letter-spacing:1px; margin-top:10px;">${displayName}</div>`,
         html: `
         <div style="text-align:left">
         <h5>📅 今日狀態</h5>
@@ -212,20 +213,17 @@ async function openStudent(student){
 }
 
 //==========================================
-// 儲存學生資料
+// 儲存學生資料 (已修正預防 CORS)
 //==========================================
 
 async function saveStudent(student, data){
     Swal.fire({
         title: "儲存中...",
         allowOutsideClick: false,
-        didOpen(){
-            Swal.showLoading();
-        }
+        didOpen(){ Swal.showLoading(); }
     });
 
     try {
-        // 關鍵修復：使用 text/plain 避免 CORS preflight 問題
         const response = await fetch(API_URL, {
             method: "POST",
             headers: {
@@ -257,7 +255,7 @@ async function saveStudent(student, data){
             Swal.fire("錯誤", result.message, "error");
         }
     } catch(err) {
-        console.error("儲存失敗:", err);
+        console.error(err);
         Swal.fire("錯誤", "無法連線 Apps Script", "error");
     }
 }
@@ -300,7 +298,7 @@ function updateCard(card, student){
 }
 
 //==========================================
-// Toast
+// Toast 訊息通知
 //==========================================
 
 function toast(icon, title){
