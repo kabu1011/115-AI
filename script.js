@@ -3,15 +3,17 @@
 // Version 2.0
 // ==========================================
 
-const API_URL = "https://script.google.com/macros/s/AKfycbxPP-qxjl58Y8G4ozxpphw73z_8d2iM5oj4CgQ1WVPmWddg6O2yeiorxE_2ptZlDww/exec";
+// ★ 改成你的 Apps Script Web App 網址
+const API_URL = "https://script.google.com/macros/s/AKfycbxPP-qxjl58Y8G4ozxp
+    phw73z_8d2iM5oj4CgQ1WVPmWddg6O2yeiorxE_2ptZlDww/exec";
 
 let activities = [];
 let students = [];
 let currentActivity = null;
 
-//==============================
+//==========================================
 // 初始化
-//==============================
+//==========================================
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -19,53 +21,78 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-//==============================
+//==========================================
 // 載入活動
-//==============================
+//==========================================
 
 async function loadActivities() {
 
+    const list = document.getElementById("activityList");
+
+    list.innerHTML = `
+
+    <div class="col-12 text-center py-5">
+
+        <div class="spinner-border text-primary"></div>
+
+        <div class="mt-3">
+
+            活動載入中...
+
+        </div>
+
+    </div>
+
+    `;
+
     try {
 
-        const res = await fetch(
+        const response = await fetch(
+
             API_URL + "?action=getActivities"
+
         );
 
-        activities = await res.json();
+        activities = await response.json();
 
         renderActivities();
 
-    } catch (err) {
+    } catch (error) {
 
-        console.error(err);
+        console.error(error);
 
         Swal.fire(
+
             "錯誤",
+
             "無法取得活動資料",
+
             "error"
+
         );
 
     }
 
 }
 
-//==============================
+//==========================================
 // 顯示活動
-//==============================
+//==========================================
 
 function renderActivities() {
 
-    const list =
-        document.getElementById("activityList");
+    const list = document.getElementById("activityList");
 
     list.innerHTML = "";
 
     activities.forEach(activity => {
 
-        const template =
-            document
+        const template = document
+
             .getElementById("activityTemplate")
+
             .content
+
             .cloneNode(true);
 
         template.querySelector(".activity-date").textContent =
@@ -75,7 +102,7 @@ function renderActivities() {
             activity.Title;
 
         template.querySelector(".progress-text").textContent =
-            `${activity.Completed} / ${activity.Total}`;
+            activity.Completed + " / " + activity.Total;
 
         template.querySelector(".btn-start").onclick = () => {
 
@@ -89,9 +116,9 @@ function renderActivities() {
 
 }
 
-//==============================
+//==========================================
 // 開啟活動
-//==============================
+//==========================================
 
 async function openActivity(activity) {
 
@@ -102,15 +129,22 @@ async function openActivity(activity) {
     document.getElementById("studentPage").style.display = "block";
 
     document.getElementById("activityTitle").innerHTML =
-        `${activity.Title}<br><small>${activity.Date}</small>`;
+
+        activity.Title +
+
+        "<br><small>" +
+
+        activity.Date +
+
+        "</small>";
 
     await loadStudents();
 
 }
 
-//==============================
+//==========================================
 // 返回首頁
-//==============================
+//==========================================
 
 function backActivity() {
 
@@ -119,60 +153,85 @@ function backActivity() {
     document.getElementById("activityPage").style.display = "block";
 
 }
-
-//==============================
+//==========================================
 // 載入學生
-//==============================
+//==========================================
 
 async function loadStudents() {
 
+    const list = document.getElementById("studentList");
+
+    list.innerHTML = `
+
+    <div class="col-12 text-center py-5">
+
+        <div class="spinner-border text-primary"></div>
+
+        <div class="mt-3">
+
+            學生資料載入中...
+
+        </div>
+
+    </div>
+
+    `;
+
     try {
 
-        const res = await fetch(
+        const response = await fetch(
+
             API_URL +
             "?action=getStudents&activityId=" +
             currentActivity.ActivityID
+
         );
 
-        students = await res.json();
+        students = await response.json();
 
         renderStudents(students);
 
-    } catch (err) {
+    } catch (error) {
 
-        console.error(err);
+        console.error(error);
 
         Swal.fire(
+
             "錯誤",
+
             "無法取得學生資料",
+
             "error"
+
         );
 
     }
 
 }
-//==============================
-// 顯示學生
-//==============================
 
-function renderStudents(data){
+//==========================================
+// 顯示學生
+//==========================================
+
+function renderStudents(data) {
 
     const list = document.getElementById("studentList");
 
     list.innerHTML = "";
 
-    data.forEach(student=>{
+    data.forEach(student => {
 
-        const template =
-            document.getElementById("studentTemplate")
+        const template = document
+
+            .getElementById("studentTemplate")
+
             .content
+
             .cloneNode(true);
 
-        const card =
-            template.querySelector(".student-card");
+        const card = template.querySelector(".student-card");
 
         card.dataset.id = student.StudentID;
-        card.dataset.name = student.Name;
 
         template.querySelector(".student-id").textContent =
             student.StudentID;
@@ -180,13 +239,13 @@ function renderStudents(data){
         template.querySelector(".student-name").textContent =
             student.Name;
 
-        if(student.Status){
+        if (student.Status) {
 
-            updateCard(card,student);
+            updateCard(card, student);
 
         }
 
-        card.onclick=()=>{
+        card.onclick = () => {
 
             openStudent(student);
 
@@ -198,22 +257,23 @@ function renderStudents(data){
 
 }
 
-//==============================
+//==========================================
 // 搜尋學生
-//==============================
+//==========================================
 
-document.getElementById("searchInput")
-.addEventListener("input",searchStudent);
+document
 
-function searchStudent(){
+.getElementById("searchInput")
 
-    const keyword =
-    document.getElementById("searchInput")
-    .value
-    .trim()
-    .toLowerCase();
+.addEventListener("input", function () {
 
-    if(keyword===""){
+    const keyword = this.value
+
+        .trim()
+
+        .toLowerCase();
+
+    if (keyword === "") {
 
         renderStudents(students);
 
@@ -221,18 +281,22 @@ function searchStudent(){
 
     }
 
-    const result = students.filter(student=>{
+    const result = students.filter(student => {
 
-        return(
+        return (
 
             student.StudentID
+
             .toLowerCase()
+
             .includes(keyword)
 
             ||
 
             student.Name
+
             .toLowerCase()
+
             .includes(keyword)
 
         );
@@ -241,13 +305,13 @@ function searchStudent(){
 
     renderStudents(result);
 
-}
+});
 
-//==============================
-// 點學生
-//==============================
+//==========================================
+// 點選學生
+//==========================================
 
-async function openStudent(student){
+async function openStudent(student) {
 
     const status = student.Status || "參加";
 
@@ -257,122 +321,159 @@ async function openStudent(student){
 
     const { value } = await Swal.fire({
 
-        title:
-        `<div style="font-size:34px">
-            ${student.Name}
-        </div>
-        <div style="font-size:20px;color:#94A3B8">
-            ${student.StudentID}
-        </div>`,
+        title: student.Name,
 
-        width:650,
+        html: `
 
-        confirmButtonText:"確認送出",
+<div style="text-align:left">
 
-        cancelButtonText:"取消",
+<b>是否參加</b>
 
-        showCancelButton:true,
-
-        html:`
-
-<div style="text-align:left;font-size:22px;line-height:2.2">
-
-<b>📌 是否參加</b>
+<br><br>
 
 <label>
+
 <input type="radio"
+
 name="status"
+
 value="參加"
-${status=="參加"?"checked":""}>
+
+${status==="參加"?"checked":""}>
+
 參加
-</label>
+
+</label><br>
 
 <label>
+
 <input type="radio"
+
 name="status"
+
 value="上午請假"
-${status=="上午請假"?"checked":""}>
+
+${status==="上午請假"?"checked":""}>
+
 上午請假
-</label>
+
+</label><br>
 
 <label>
+
 <input type="radio"
+
 name="status"
+
 value="下午請假"
-${status=="下午請假"?"checked":""}>
+
+${status==="下午請假"?"checked":""}>
+
 下午請假
-</label>
+
+</label><br>
 
 <label>
+
 <input type="radio"
+
 name="status"
+
 value="全天請假"
-${status=="全天請假"?"checked":""}>
+
+${status==="全天請假"?"checked":""}>
+
 全天請假
+
 </label>
 
 <hr>
 
-<b>🍱 午餐</b>
+<b>午餐</b>
+
+<br><br>
 
 <label>
+
 <input type="radio"
+
 name="lunch"
+
 value="需要"
-${lunch=="需要"?"checked":""}>
+
+${lunch==="需要"?"checked":""}>
+
 需要
-</label>
+
+</label><br>
 
 <label>
+
 <input type="radio"
+
 name="lunch"
+
 value="不需要"
-${lunch=="不需要"?"checked":""}>
+
+${lunch==="不需要"?"checked":""}>
+
 不需要
+
 </label>
 
 <hr>
 
-<b>🥩 餐點</b>
+<b>餐點</b>
+
+<br><br>
 
 <label>
+
 <input type="radio"
+
 name="meal"
+
 value="葷"
-${meal=="葷"?"checked":""}>
+
+${meal==="葷"?"checked":""}>
+
 葷食
-</label>
+
+</label><br>
 
 <label>
+
 <input type="radio"
+
 name="meal"
+
 value="素"
-${meal=="素"?"checked":""}>
+
+${meal==="素"?"checked":""}>
+
 素食
+
 </label>
 
 </div>
 
-`,
+        `,
 
-        preConfirm(){
+        confirmButtonText: "確認送出",
 
-            return{
+        cancelButtonText: "取消",
 
-                status:
-                document.querySelector(
-                "input[name='status']:checked"
-                ).value,
+        showCancelButton: true,
 
-                lunch:
-                document.querySelector(
-                "input[name='lunch']:checked"
-                ).value,
+        preConfirm() {
 
-                meal:
-                document.querySelector(
-                "input[name='meal']:checked"
-                ).value
+            return {
+
+                status: document.querySelector("input[name='status']:checked").value,
+
+                lunch: document.querySelector("input[name='lunch']:checked").value,
+
+                meal: document.querySelector("input[name='meal']:checked").value
 
             };
 
@@ -380,24 +481,24 @@ ${meal=="素"?"checked":""}>
 
     });
 
-    if(!value) return;
+    if (!value) return;
 
-    saveStudent(student,value);
+    saveStudent(student, value);
 
 }
-//==============================
-// 儲存資料
-//==============================
+//==========================================
+// 儲存學生資料
+//==========================================
 
-async function saveStudent(student,data){
+async function saveStudent(student, data) {
 
     Swal.fire({
 
-        title:"儲存中...",
+        title: "儲存中...",
 
-        allowOutsideClick:false,
+        allowOutsideClick: false,
 
-        didOpen(){
+        didOpen() {
 
             Swal.showLoading();
 
@@ -405,57 +506,55 @@ async function saveStudent(student,data){
 
     });
 
-    try{
+    try {
 
-        const body={
+        const response = await fetch(API_URL, {
 
-            action:"save",
+            method: "POST",
 
-            activityId:currentActivity.ActivityID,
+            headers: {
 
-            studentId:student.StudentID,
-
-            name:student.Name,
-
-            status:data.status,
-
-            lunch:data.lunch,
-
-            meal:data.meal
-
-        };
-
-        const res=await fetch(API_URL,{
-
-            method:"POST",
-
-            headers:{
-
-                "Content-Type":"application/json"
+                "Content-Type": "application/json"
 
             },
 
-            body:JSON.stringify(body)
+            body: JSON.stringify({
+
+                action: "save",
+
+                activityId: currentActivity.ActivityID,
+
+                studentId: student.StudentID,
+
+                name: student.Name,
+
+                status: data.status,
+
+                lunch: data.lunch,
+
+                meal: data.meal
+
+            })
 
         });
 
-        const result=await res.json();
+        const result = await response.json();
 
         Swal.close();
 
-        if(result.success){
+        if (result.success) {
 
-            student.Status=data.status;
-            student.Lunch=data.lunch;
-            student.Meal=data.meal;
+            student.Status = data.status;
+            student.Lunch = data.lunch;
+            student.Meal = data.meal;
 
             renderStudents(students);
 
-            toast("success","已儲存");
-
             loadActivities();
 
-        }else{
+            toast("success", "資料已儲存");
+
+        } else {
 
             Swal.fire(
 
@@ -469,7 +568,7 @@ async function saveStudent(student,data){
 
         }
 
-    }catch(err){
+    } catch (err) {
 
         console.error(err);
 
@@ -477,7 +576,7 @@ async function saveStudent(student,data){
 
             "錯誤",
 
-            "無法連線 Apps Script",
+            "無法連線伺服器",
 
             "error"
 
@@ -487,34 +586,37 @@ async function saveStudent(student,data){
 
 }
 
-//==============================
-// 更新學生卡片
-//==============================
+//==========================================
+// 更新卡片狀態
+//==========================================
 
-function updateCard(card,student){
+function updateCard(card, student) {
 
-    const status=
-        card.querySelector(".student-status");
+    const status = card.querySelector(".student-status");
 
-    const dot=
-        card.querySelector(".status-dot");
+    const dot = card.querySelector(".status-dot");
 
     card.classList.remove(
+
         "green",
+
         "yellow",
+
         "orange",
+
         "red"
+
     );
 
-    switch(student.Status){
+    switch (student.Status) {
 
         case "參加":
 
             card.classList.add("green");
 
-            dot.style.background="#22C55E";
+            dot.style.background = "#22C55E";
 
-            status.innerHTML="● 已完成";
+            status.textContent = "● 已確認";
 
             break;
 
@@ -522,9 +624,9 @@ function updateCard(card,student){
 
             card.classList.add("yellow");
 
-            dot.style.background="#FACC15";
+            dot.style.background = "#FACC15";
 
-            status.innerHTML="● 上午請假";
+            status.textContent = "● 上午請假";
 
             break;
 
@@ -532,9 +634,9 @@ function updateCard(card,student){
 
             card.classList.add("orange");
 
-            dot.style.background="#FB923C";
+            dot.style.background = "#FB923C";
 
-            status.innerHTML="● 下午請假";
+            status.textContent = "● 下午請假";
 
             break;
 
@@ -542,75 +644,84 @@ function updateCard(card,student){
 
             card.classList.add("red");
 
-            dot.style.background="#EF4444";
+            dot.style.background = "#EF4444";
 
-            status.innerHTML="● 全天請假";
+            status.textContent = "● 全天請假";
 
             break;
 
         default:
 
-            dot.style.background="#64748B";
+            dot.style.background = "#64748B";
 
-            status.innerHTML="● 尚未確認";
+            status.textContent = "● 尚未確認";
 
     }
 
 }
 
-//==============================
+//==========================================
 // Toast
-//==============================
+//==========================================
 
-function toast(icon,title){
+function toast(icon, title) {
 
     Swal.fire({
 
-        toast:true,
+        toast: true,
 
-        position:"top-end",
+        position: "top-end",
 
-        icon:icon,
+        icon: icon,
 
-        title:title,
+        title: title,
 
-        showConfirmButton:false,
+        showConfirmButton: false,
 
-        timer:1500,
+        timer: 1500,
 
-        timerProgressBar:true
+        timerProgressBar: true
 
     });
 
 }
 
-//==============================
-// 重新整理活動
-//==============================
+//==========================================
+// 重新整理首頁
+//==========================================
 
-async function refreshActivities(){
+async function refreshHome() {
+
+    document.getElementById("studentPage").style.display = "none";
+
+    document.getElementById("activityPage").style.display = "block";
 
     await loadActivities();
 
 }
 
-//==============================
+//==========================================
 // 清除搜尋
-//==============================
+//==========================================
 
-function clearSearch(){
+function clearSearch() {
 
-    document.getElementById("searchInput").value="";
+    document.getElementById("searchInput").value = "";
 
     renderStudents(students);
 
 }
 
-//==============================
+//==========================================
 // Console
-//==============================
+//==========================================
 
-console.log("================================");
+console.log("====================================");
+
 console.log("福瑞斯特中小學－AI校隊 V2");
-console.log("Frontend Ready");
-console.log("================================");
+
+console.log("Version : 2.0");
+
+console.log("Ready");
+
+console.log("====================================");
